@@ -288,4 +288,53 @@
 (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
   (add-hook hook (lambda () (flyspell-mode -1))))
 
+
+
+
+(add-hook 'c++-mode-hook
+          '(lambda ()
+
+             ;; Use stroustrup style
+             (c-set-style "stroustrup")
+
+             ;; Setting indentation lvel
+             (setq c-basic-offset 4)
+
+             ;; Make TAB equivilent to 4 spaces
+             (setq tab-width 4)
+
+             ;; Use spaces to indent instead of tabs.
+             (setq indent-tabs-mode nil)
+
+             ;; Indent the continuation by 2
+             (setq c-continued-statement-offset 2)
+
+             ;; Brackets should be at same indentation level as the statements they open
+             ;; for example:
+             ;;                 if (0)        becomes        if (0)
+             ;;                     {                        {
+             ;;                        ;                         ;
+             ;;                     }                        }
+             (c-set-offset 'substatement-open 0)
+
+             ;; make open-braces after a case
+             (c-set-offset 'case-label '+)
+
+             ;; Not indent code inside a namespace
+             ;; for example:
+             ;;                namespace A {
+             ;;
+             ;;                int namespace_global_variable;
+             ;;
+             ;;                class Class {
+             ;;
+             ;;                Class();
+             ;;                //...
+             ;;                };
+             ;;
+             ;;                }
+             ;;(c-set-offset 'innamespace 0)
+             ))
+
+
 (load-theme 'solarized-dark t)
