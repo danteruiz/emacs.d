@@ -226,12 +226,6 @@
                        company-irony company-yasnippet company-clang))
   )
 
-;; Zero delay when pressing tab
-(setq company-idle-delay 0)
-(define-key c-mode-map [(tab)] 'company-complete)
-(define-key c++-mode-map [(tab)] 'company-complete)
-;; Delay when idle because I want to be able to think
-(setq company-idle-delay 0.2)
 
 ;; Prohibit semantic from searching through system headers. We want
 ;; company-clang to do that for us.
@@ -338,3 +332,17 @@
 
 
 (load-theme 'solarized-dark t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (yasnippet writegood-mode window-numbering web-mode vlf solarized-theme rtags markdown-mode magit hungry-delete helm-ls-hg helm-ls-git helm-flyspell helm-flycheck helm-ctest helm flycheck-pyflakes flycheck-irony flycheck dash company-irony-c-headers counsel-projectile flyspell-correct-ivy counsel company-irony company cmake-mode cmake-ide autopair auto-complete auctex async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
