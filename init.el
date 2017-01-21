@@ -1,129 +1,7 @@
 (setq load-prefer-newer t)
 
-;; We set `user-emacs-directory' here so we can use command-line
-;; switch different emacs configuration like following:
-;;
-;;    emacs -q -l ~/coldnew-spacemacs/init.el
-(defconst user-emacs-directory
-  (file-name-directory (or load-file-name (buffer-file-name)))
-  "My emacs config directory.")
-
-(defconst user-cache-directory
-  (file-name-as-directory (concat user-emacs-directory ".cache"))
-  "My emacs storage area for persistent files.")
-;; create the `user-cache-directory' if not exists
-(make-directory user-cache-directory t)
-
-
-(defconst user-ramdisk-directory
-    (let ((ramdisk "/Volumes/ramdisk/")
-          (user-ramdisk                   ; ~/ramdisk/
-           (concat (getenv "HOME") "/ramdisk/"))
-          (tmp "/tmp/"))
-      (if (eq system-type 'darwin)
-          ramdisk
-        ;; if ~/ramdisk/ exist, use it
-        (if (file-exists-p user-ramdisk)
-            user-ramdisk
-          ;; fallcack to system default ramdisk dir
-          temporary-file-directory)))
-  "My ramdisk path in system.")
-
-(defun my/load-secret ()
-  "Load my secret setting include password... etc."
-  (let ((secret "~/.secret.el.gpg"))
-    (when (file-exists-p secret) (load-file secret))))
-
-;; This must come before configurations of installed packages.
-;; Don't delete this line. If you don't want it, just comment it out by adding a
-;; semicolon to the start of the line. You may delete these explanatory
-;; comments.
-(package-initialize)
-
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-
-(add-to-list 'auto-mode-alist '("Cask$" . emacs-lisp-mode))
-
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
-
-(require 'pallet)
-(pallet-mode t)
-
-(require 'use-package)                  ; Installed by Cask
-;; Auto install non-installed packages.
-;; (setq use-package-always-ensure t)
-
-(require 'req-package)
-
-(req-package-finish)
-
-(require 'paradox)                  ; Installed by Cask
-
-
-;; Add directories to emacs's `load-path' recursively.
-;; if path does not exist, create directory.
-(let* ((lisp-dir '("local-lisp/" "themes/")))
-  (dolist (lisp-path lisp-dir)
-    (when (not (file-exists-p lisp-path))
-      (make-directory (concat user-emacs-directory lisp-path) t))
-    (let* ((load-dir (concat user-emacs-directory lisp-path))
-           (default-directory load-dir))
-      (setq load-path
-            (append
-             (let ((load-path (copy-sequence load-path)))
-               (append
-                (copy-sequence (normal-top-level-add-to-load-path '(".")))
-                (normal-top-level-add-subdirs-to-load-path)))
-             load-path)))))
-
-;;;; add some system site-lisp to my load-path
-
-;; Mac OSX
-  (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
-    (normal-top-level-add-subdirs-to-load-path))
-
-;; Linux
-(when (equal system-type 'gnu/linux)
-  (let ((default-directory "/usr/share/emacs/site-lisp/"))
-    (normal-top-level-add-subdirs-to-load-path)))
-
-;; load the `load-modules.el' file which help me load external modulept
-(let ((script (concat user-emacs-directory "modules/load-modules.el")))
-  (when (file-exists-p script)
-    (load script)))
-
-(setq kill-buffer-query-functions
-      (remq 'process-kill-buffer-query-function
-            kill-buffer-query-functions))
-
-(setq-default custom-file (concat user-cache-directory "custom.el"))
-;; load custom-file only when file exist
-(when (file-exists-p custom-file)
-  (load-file custom-file))
-
-(setq auto-save-list-file-prefix
-      (concat user-cache-directory "auto-save-list/.saves-"))
-
-(setq auto-save-interval 100)
-(setq auto-save-timeout  60)
-(setq auto-save-visited-file-name nil)
-(setq delete-auto-save-files t)
-
-(let ((backup-dir (concat user-cache-directory "backup")))
-  ;; Move backup file to `~/.emacs.d/.cache/backup'
-  (setq backup-directory-alist `(("." . ,backup-dir)))
-  ;; Makesure backup directory exist
-  (when (not (file-exists-p backup-dir))
-    (make-directory backup-dir t)))
-
-(setq delete-by-moving-to-trash nil)
-(setq version-control t)
-(setq kept-old-versions 10)
-(setq kept-new-versions 20)
-(setq delete-old-versions t)
-(setq backup-by-copying t)
-
+(setq auto-save-default nil)
+;; emacs window configuration
 (when (featurep 'menu-bar) (menu-bar-mode -1))
 
 (when (featurep 'tool-bar) (tool-bar-mode -1))
@@ -147,179 +25,267 @@
 (prefer-coding-system 'utf-8)
 (setq system-time-locale "en_US")
 
-
-(use-package iedit
-  :bind (("C-;" . iedit-mode)))
-
-
-(global-hungry-delete-mode)
-
-
-(add-to-list 'magic-mode-alist
-             `(,(lambda ()
-                  (and (string= (file-name-extension (or (buffer-file-name) "")) "h")
-                       (or (re-search-forward "#include <\\w+>"
-                                              magic-mode-regexp-match-limit t)
-                           (re-search-forward "\\W\\(class\\|template\\namespace\\)\\W"
-                                              magic-mode-regexp-match-limit t)
-                           (re-search-forward "std::"
-                                              magic-mode-regexp-match-limit t))))
-               . c++-mode))
+(require 'package) ;; You might already have this line
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 
+;; Add these to the PATH so that proper executables are found
+(setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/bin"))
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/texbin")))
+(setq exec-path (append exec-path '("/usr/bin")))
+(setq exec-path (append exec-path '("/usr/local/bin")))
 
-(add-hook 'c-mode-common-hook
-	  '(lambda ()
-	     (setq c-eldoc-includes "`pkg-config --cflags --libs` -I./ -I../")
-	     (c-turn-on-eldoc-mode)))
+(package-initialize)
+;; list the packages you want
+(defvar package-list)
+(setq package-list '(async auctex auto-complete autopair cmake-ide
+                           cmake-mode company company-irony
+			   counsel flyspell-correct-ivy
+			   counsel-projectile ivy
+			   projectile
+                           company-irony-c-headers dash epl flycheck
+                           flycheck-irony flycheck-pyflakes 
+                           helm helm-core helm-ctest
+                           helm-flycheck helm-flyspell helm-ls-git helm-ls-hg
+                           hungry-delete irony
+                           let-alist levenshtein magit markdown-mode pkg-info
+                           popup rtags seq solarized-theme vlf web-mode
+                           window-numbering writegood-mode yasnippet))
+;; fetch the list of packages available
+(unless package-archive-contents
+  (package-refresh-contents))
+;; install the missing packages
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
 
-
-
-
-(projectile-global-mode)
-
-(setq projectile-known-projects-file
-      (concat user-cache-directory "projectile-bookmarks.eld"))
-(setq projectile-cache-file
-      (concat user-cache-directory "projectile.cache"))
-;; Enable projectile globally
-
-
-  ;; enable helm globally
-(helm-mode 1)
-;; Use fuzzy match in helm
-(setq helm-M-x-fuzzy-match t)
-(setq helm-buffers-fuzzy-matching t)
-(setq helm-recentf-fuzzy-match t)
-
-;; make projectile use helm as completion system
-(setq projectile-completion-system 'helm)
-;; start helm-projectile
-(helm-projectile-on)
-
-
-
-;; rtags setup
-;; ensure that we use only rtags checking
-;; https://github.com/Andersbakken/rtags#optional-1
-(defun setup-flycheck-rtags ()
-  (interactive)
-  (flycheck-select-checker 'rtags)
-  ;; RTags creates more accurate overlays.
-  (setq-local flycheck-highlighting-mode nil)
-  (setq-local flycheck-check-syntax-automatically nil))
-
-;; only run this if rtags is installed
-(when (require 'rtags nil :noerror)
-  ;; make sure you have company-mode installed
-  (require 'company)
-  (define-key c-mode-base-map (kbd "M-.")
-    (function rtags-find-symbol-at-point))
-  (define-key c-mode-base-map (kbd "M-,")
-    (function rtags-find-references-at-point))
-  ;; disable prelude's use of C-c r, as this is the rtags keyboard prefix
-  ;;(define-key prelude-mode-map (kbd "C-c r") nil)
-  ;; install standard rtags keybindings. Do M-. on the symbol below to
-  ;; jump to definition and see the keybindings.
-  (rtags-enable-standard-keybindings)
-  ;; comment this out if you don't have or don't use helm
-  (setq rtags-use-helm t)
-  ;; company completion setup
-  (setq rtags-autostart-diagnostics t)
-  (rtags-diagnostics)
-  (setq rtags-completions-enabled t)
-  (push 'company-rtags company-backends)
-  (global-company-mode)
-  (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
-  ;; use rtags flycheck mode -- clang warnings shown inline
-  (require 'flycheck-rtags)
-  ;; c-mode-common-hook is also called by c++-mode
-  (add-hook 'c-mode-common-hook #'setup-flycheck-rtags))
-
-(req-package glsl-mode
-  :mode (("\\.vs\\'" . glsl-mode)
-         ("\\.fs\\'" . glsl-mode)
-         ("\\.gs\\'" . glsl-mode))
-  :config
-  (setq glsl-other-file-alist '(("\\.fs$" (".vs")) ("\\.vs$" (".fs")))))
-
-(req-package js-mode
-  :mode "\\.js\\'")
-
-(req-package cmake-mode
-  :mode ("CMakeLists\\.txt\\'" "\\.cmake\\'"))
-
-(req-package cwarn
-  :config
-  (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
-
-(defun my/cc-mode/highlight-if-0 ()
-  "highlight c/c++ #if 0 #endif macros"
-  (setq cpp-known-face 'default)
-  (setq cpp-unknown-face 'default)
-  (setq cpp-known-writable 't)
-  (setq cpp-unknown-writable 't)
-  (setq cpp-edit-list '(("0" '(foreground-color . "gray")  default both)
-                        ("1" default font-lock-comment-face both)))
-  (cpp-highlight-buffer t))
-
-;; Add to c/c++ mode
-(defun my/cc-mode/highlight-if-0-hook ()
-  (when (or (eq major-mode 'c++-mode) (eq major-mode 'c-mode))
-    (my/cc-mode/highlight-if-0)))
-(add-hook 'after-save-hook #'my/cc-mode/highlight-if-0-hook)
-
-(dolist (m '(c-mode c++-mode))
-  (font-lock-add-keywords
-   m
-   '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
-
-(add-hook 'c-mode-common-hook 'electric-pair-mode)
-(add-hook 'js-mode-hook 'electric-pair-mode)
-
+;; Require flycheck to be present
+(require 'flycheck)
+;; Force flycheck to always use c++11 support. We use
+;; the clang language backend so this is set to clang
 (add-hook 'c++-mode-hook
-          '(lambda ()
+          (lambda () (setq flycheck-clang-language-standard "c++11")))
+;; Turn flycheck on everywhere
+(global-flycheck-mode)
 
-             ;; Use stroustrup style
-             (c-set-style "stroustrup")
+;; Use flycheck-pyflakes for python. Seems to work a little better.
+(require 'flycheck-pyflakes)
 
-             ;; Setting indentation lvel
-             (setq c-basic-offset 4)
 
-             ;; Make TAB equivilent to 4 spaces
-             (setq tab-width 4)
+;; Load rtags and start the cmake-ide-setup process
+(require 'rtags)
 
-             ;; Use spaces to indent instead of tabs.
-             (setq indent-tabs-mode nil)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Setup cmake-ide
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'cmake-ide)
+(cmake-ide-setup)
+;; Set cmake-ide-flags-c++ to use C++11
+(setq cmake-ide-flags-c++ (append '("-std=c++11")))
+;; We want to be able to compile with a keyboard shortcut
+(global-set-key (kbd "C-c m") 'cmake-ide-compile)
 
-             ;; Indent the continuation by 2
-             (setq c-continued-statement-offset 2)
+;; Set rtags to enable completions and use the standard keybindings.
+;; A list of the keybindings can be found at:
+;; http://syamajala.github.io/c-ide.html
+(setq rtags-autostart-diagnostics t)
+(rtags-diagnostics)
+(setq rtags-completions-enabled t)
+(rtags-enable-standard-keybindings)
 
-             ;; Brackets should be at same indentation level as the statements they open
-             ;; for example:
-             ;;                 if (0)        becomes        if (0)
-             ;;                     {                        {
-             ;;                        ;                         ;
-             ;;                     }                        }
-             (c-set-offset 'substatement-open 0)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Set up helm
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Load helm and set M-x to helm, buffer to helm, and find files to herm
+(require 'helm-config)
+(require 'helm)
+(require 'helm-ls-git)
+(require 'helm-ctest)
+;; Use C-c h for helm instead of C-x c
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c t") 'helm-ctest)
+(setq
+ helm-split-window-in-side-p           t
+   ; open helm buffer inside current window,
+   ; not occupy whole other window
+ helm-move-to-line-cycle-in-source     t
+   ; move to end or beginning of source when
+   ; reaching top or bottom of source.
+ helm-ff-search-library-in-sexp        t
+   ; search for library in `require' and `declare-function' sexp.
+ helm-scroll-amount                    8
+   ; scroll 8 lines other window using M-<next>/M-<prior>
+ helm-ff-file-name-history-use-recentf t
+ ;; Allow fuzzy matches in helm semantic
+ helm-semantic-fuzzy-match t
+ helm-imenu-fuzzy-match t)
+;; Have helm automaticaly resize the window
+(helm-autoresize-mode 1)
+(setq rtags-use-helm t)
+(require 'helm-flycheck) ;; Not necessary if using ELPA package
+(eval-after-load 'flycheck
+  '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
 
-             ;; make open-braces after a case
-             (c-set-offset 'case-label '+)
 
-             ;; Not indent code inside a namespace
-             ;; for example:
-             ;;                namespace A {
-             ;;
-             ;;                int namespace_global_variable;
-             ;;
-             ;;                class Class {
-             ;;
-             ;;                Class();
-             ;;                //...
-             ;;                };
-             ;;
-             ;;                }
-             ;;(c-set-offset 'innamespace 0)
-             ))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package: yasnippet
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'yasnippet)
+;; To get a bunch of extra snippets that come in super handy see:
+;; https://github.com/AndreaCrotti/yasnippet-snippets
+;; or use:
+;; git clone https://github.com/AndreaCrotti/yasnippet-snippets.git ~/.emacs.d/yassnippet-snippets/
+(add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets/")
+(yas-global-mode 1)
+(yas-reload-all)
 
-(load-theme 'reykjavik)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Set up code completion with company and irony
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'company)
+(require 'company-rtags)
+(global-company-mode)
+
+;; Enable semantics mode for auto-completion
+(require 'cc-mode)
+(require 'semantic)
+(global-semanticdb-minor-mode 1)
+(global-semantic-idle-scheduler-mode 1)
+(semantic-mode 1)
+
+;; Setup irony-mode to load in c-modes
+(require 'irony)
+(require 'company-irony-c-headers)
+(require 'cl)
+(add-hook 'c++-mode-hook 'irony-mode)
+(add-hook 'c-mode-hook 'irony-mode)
+(add-hook 'objc-mode-hook 'irony-mode)
+
+;; irony-mode hook that is called when irony is triggered
+(defun my-irony-mode-hook ()
+  "Custom irony mode hook to remap keys."
+  (define-key irony-mode-map [remap completion-at-point]
+    'irony-completion-at-point-async)
+  (define-key irony-mode-map [remap complete-symbol]
+    'irony-completion-at-point-async))
+
+(add-hook 'irony-mode-hook 'my-irony-mode-hook)
+(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+
+;; company-irony setup, c-header completions
+(add-hook 'irony-mode-hook 'company-irony-setup-begin-commands)
+;; Remove company-semantic because it has higher precedance than company-clang
+;; Using RTags completion is also faster than semantic, it seems. Semantic
+;; also provides a bunch of technically irrelevant completions sometimes.
+;; All in all, RTags just seems to do a better job.
+(setq company-backends (delete 'company-semantic company-backends))
+;; Enable company-irony and several other useful auto-completion modes
+;; We don't use rtags since we've found that for large projects this can cause
+;; async timeouts. company-semantic (after company-clang!) works quite well
+;; but some knowledge some knowledge of when best to trigger is still necessary.
+(eval-after-load 'company
+  '(add-to-list
+    'company-backends '(company-irony-c-headers
+                        company-irony company-yasnippet
+                        company-clang company-rtags)
+    )
+  )
+
+(defun my-disable-semantic ()
+  "Disable the company-semantic backend."
+  (interactive)
+  (setq company-backends (delete '(company-irony-c-headers
+                                   company-irony company-yasnippet
+                                   company-clang company-rtags
+                                   company-semantic) company-backends))
+  (add-to-list
+   'company-backends '(company-irony-c-headers
+                       company-irony company-yasnippet
+                       company-clang company-rtags))
+  )
+(defun my-enable-semantic ()
+  "Enable the company-semantic backend."
+  (interactive)
+  (setq company-backends (delete '(company-irony-c-headers
+                                   company-irony company-yasnippet
+                                   company-clang) company-backends))
+  (add-to-list
+   'company-backends '(company-irony-c-headers
+                       company-irony company-yasnippet company-clang))
+  )
+
+;; Zero delay when pressing tab
+(setq company-idle-delay 0)
+(define-key c-mode-map [(tab)] 'company-complete)
+(define-key c++-mode-map [(tab)] 'company-complete)
+;; Delay when idle because I want to be able to think
+(setq company-idle-delay 0.2)
+
+;; Prohibit semantic from searching through system headers. We want
+;; company-clang to do that for us.
+(setq-mode-local c-mode semanticdb-find-default-throttle
+                 '(local project unloaded recursive))
+(setq-mode-local c++-mode semanticdb-find-default-throttle
+                 '(local project unloaded recursive))
+
+(semantic-remove-system-include "/usr/include/" 'c++-mode)
+(semantic-remove-system-include "/usr/local/include/" 'c++-mode)
+(add-hook 'semantic-init-hooks
+          'semantic-reset-system-include)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Flyspell Mode for Spelling Corrections
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'flyspell)
+;; The welcome message is useless and can cause problems
+(setq flyspell-issue-welcome-flag nil)
+;; Fly spell keyboard shortcuts so no mouse is needed
+;; Use helm with flyspell
+(define-key flyspell-mode-map (kbd "<f8>") 'helm-flyspell-correct)
+;; (global-set-key (kbd "<f8>") 'ispell-word)
+(global-set-key (kbd "C-S-<f8>") 'flyspell-mode)
+(global-set-key (kbd "C-M-<f8>") 'flyspell-buffer)
+(global-set-key (kbd "C-<f8>") 'flyspell-check-previous-highlighted-word)
+(global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
+;; Set the way word highlighting is done
+(defun flyspell-check-next-highlighted-word ()
+  "Custom function to spell check next highlighted word."
+  (interactive)
+  (flyspell-goto-next-error)
+  (ispell-word)
+  )
+
+;; Spell check comments in c++ and c common
+(add-hook 'c++-mode-hook  'flyspell-prog-mode)
+(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
+
+;; Enable flyspell in text mode
+(if (fboundp 'prog-mode)
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (dolist (hook '(lisp-mode-hook emacs-lisp-mode-hook scheme-mode-hook
+                  clojure-mode-hook ruby-mode-hook yaml-mode
+                  python-mode-hook shell-mode-hook php-mode-hook
+                  css-mode-hook haskell-mode-hook caml-mode-hook
+                  nxml-mode-hook crontab-mode-hook perl-mode-hook
+                  tcl-mode-hook javascript-mode-hook))
+    (add-hook hook 'flyspell-prog-mode)))
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
+
+(load-theme 'solarized-dark t)
