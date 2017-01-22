@@ -1,5 +1,26 @@
 (setq load-prefer-newer t)
 
+
+(defconst user-cache-directory
+  (file-name-as-directory (concat user-emacs-directory ".cache"))
+  "My emacs storage area for persistent files.")
+;; create the `user-cache-directory' if not exists
+(make-directory user-cache-directory t)
+
+(let ((backup-dir (concat user-cache-directory "backup")))
+  ;; Move backup file to `~/.emacs.d/.cache/backup'
+  (setq backup-directory-alist `(("." . ,backup-dir)))
+  ;; Makesure backup directory exist
+  (when (not (file-exists-p backup-dir))
+    (make-directory backup-dir t)))
+
+(setq delete-by-moving-to-trash nil)
+(setq version-control t)
+(setq kept-old-versions 10)
+(setq kept-new-versions 20)
+(setq delete-old-versions t)
+(setq backup-by-copying t)
+
 (setq auto-save-default nil)
 ;; emacs window configuration
 (when (featurep 'menu-bar) (menu-bar-mode -1))
@@ -65,6 +86,20 @@
   (unless (package-installed-p package)
     (package-install package)))
 
+
+
+(ivy-mode 1)
+(projectile-global-mode)
+
+(setq projectile-known-projects-file
+      (concat user-cache-directory "projectile-bookmarks.eld"))
+(setq projectile-cache-file
+      (concat user-cache-directory "projectile.cache"))
+;; Enable projectile globally
+
+(setq projectile-completion-system 'ivy)
+(counsel-projectile-on)
+
 ;; Require flycheck to be present
 (require 'flycheck)
 ;; Force flycheck to always use c++11 support. We use
@@ -91,6 +126,7 @@
 ;; We want to be able to compile with a keyboard shortcut
 (global-set-key (kbd "C-c m") 'cmake-ide-compile)
 
+
 ;; Set rtags to enable completions and use the standard keybindings.
 ;; A list of the keybindings can be found at:
 ;; http://syamajala.github.io/c-ide.html
@@ -99,44 +135,8 @@
 (setq rtags-completions-enabled t)
 (rtags-enable-standard-keybindings)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Set up helm
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Load helm and set M-x to helm, buffer to helm, and find files to herm
-(require 'helm-config)
-(require 'helm)
-(require 'helm-ls-git)
-(require 'helm-ctest)
-;; Use C-c h for helm instead of C-x c
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c t") 'helm-ctest)
-(setq
- helm-split-window-in-side-p           t
-   ; open helm buffer inside current window,
-   ; not occupy whole other window
- helm-move-to-line-cycle-in-source     t
-   ; move to end or beginning of source when
-   ; reaching top or bottom of source.
- helm-ff-search-library-in-sexp        t
-   ; search for library in `require' and `declare-function' sexp.
- helm-scroll-amount                    8
-   ; scroll 8 lines other window using M-<next>/M-<prior>
- helm-ff-file-name-history-use-recentf t
- ;; Allow fuzzy matches in helm semantic
- helm-semantic-fuzzy-match t
- helm-imenu-fuzzy-match t)
-;; Have helm automaticaly resize the window
-(helm-autoresize-mode 1)
-(setq rtags-use-helm t)
-(require 'helm-flycheck) ;; Not necessary if using ELPA package
-(eval-after-load 'flycheck
-  '(define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck))
 
+(setq rtags-use-helm t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package: yasnippet
@@ -226,6 +226,12 @@
                        company-irony company-yasnippet company-clang))
   )
 
+;; Zero delay when pressing C-tab
+(setq company-idle-delay 0)
+(define-key c-mode-map [(C-tab)] 'company-complete)
+(define-key c++-mode-map [(C-tab)] 'company-complete)
+;; Delay when idle because I want to be able to think
+(setq company-idle-delay 0.2)
 
 ;; Prohibit semantic from searching through system headers. We want
 ;; company-clang to do that for us.
@@ -283,7 +289,9 @@
   (add-hook hook (lambda () (flyspell-mode -1))))
 
 
-
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 
 (add-hook 'c++-mode-hook
           '(lambda ()
@@ -313,33 +321,23 @@
 
              ;; make open-braces after a case
              (c-set-offset 'case-label '+)
-
-             ;; Not indent code inside a namespace
-             ;; for example:
-             ;;                namespace A {
-             ;;
-             ;;                int namespace_global_variable;
-             ;;
-             ;;                class Class {
-             ;;
-             ;;                Class();
-             ;;                //...
-             ;;                };
-             ;;
-             ;;                }
-             ;;(c-set-offset 'innamespace 0)
              ))
 
 
-(load-theme 'solarized-dark t)
+
+
+(load-theme 'solarized-light t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(package-selected-packages
    (quote
-    (yasnippet writegood-mode window-numbering web-mode vlf solarized-theme rtags markdown-mode magit hungry-delete helm-ls-hg helm-ls-git helm-flyspell helm-flycheck helm-ctest helm flycheck-pyflakes flycheck-irony flycheck dash company-irony-c-headers counsel-projectile flyspell-correct-ivy counsel company-irony company cmake-mode cmake-ide autopair auto-complete auctex async))))
+    (chicken-scheme yasnippet writegood-mode window-numbering web-mode vlf solarized-theme rtags markdown-mode magit hungry-delete helm-ls-hg helm-ls-git helm-flyspell helm-flycheck helm-ctest helm flycheck-pyflakes flycheck-irony flycheck dash company-irony-c-headers counsel-projectile flyspell-correct-ivy counsel company-irony company cmake-mode cmake-ide autopair auto-complete auctex async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
