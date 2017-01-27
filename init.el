@@ -162,6 +162,7 @@
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 
+(setq-default indent-tabs-mode nil)
 (add-hook 'c++-mode-hook
           '(lambda ()
 
@@ -195,7 +196,7 @@
 
 
 
-(load-theme 'solarized-light t)
+(load-theme 'solarized-dark t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
