@@ -118,6 +118,9 @@
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/moe-theme/")
+(add-to-list 'load-path "~/.emacs.d/moe-theme.el/")
+(require 'moe-theme)
 
 (add-hook 'before-save-hook 'white-space-cleanup)
 (add-hook 'c++-mode-hook
