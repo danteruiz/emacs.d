@@ -33,7 +33,7 @@
 
 (setq inhibit-startup-screen t)
 
-(blink-cursor-mode -1)
+(blink-cursor-mode 1)
 
 (setq ring-bell-function #'ignore)
 
@@ -86,78 +86,7 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-
-
-(ivy-mode 1)
-(projectile-global-mode)
-
-(setq projectile-known-projects-file
-      (concat user-cache-directory "projectile-bookmarks.eld"))
-(setq projectile-cache-file
-      (concat user-cache-directory "projectile.cache"))
-;; Enable projectile globally
-
-(setq projectile-completion-system 'ivy)
-(counsel-projectile-on)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Package: yasnippet
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'yasnippet)
-;; To get a bunch of extra snippets that come in super handy see:
-;; https://github.com/AndreaCrotti/yasnippet-snippets
-;; or use:
-;; git clone https://github.com/AndreaCrotti/yasnippet-snippets.git ~/.emacs.d/yassnippet-snippets/
-(add-to-list 'yas-snippet-dirs "~/.emacs.d/yasnippet-snippets/")
-(yas-global-mode 1)
-(yas-reload-all)
-
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flyspell Mode for Spelling Corrections
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'flyspell)
-;; The welcome message is useless and can cause problems
-(setq flyspell-issue-welcome-flag nil)
-;; Fly spell keyboard shortcuts so no mouse is needed
-;; Use helm with flyspell
-(define-key flyspell-mode-map (kbd "<f8>") 'helm-flyspell-correct)
-;; (global-set-key (kbd "<f8>") 'ispell-word)
-(global-set-key (kbd "C-S-<f8>") 'flyspell-mode)
-(global-set-key (kbd "C-M-<f8>") 'flyspell-buffer)
-(global-set-key (kbd "C-<f8>") 'flyspell-check-previous-highlighted-word)
-(global-set-key (kbd "M-<f8>") 'flyspell-check-next-highlighted-word)
-;; Set the way word highlighting is done
-(defun flyspell-check-next-highlighted-word ()
-  "Custom function to spell check next highlighted word."
-  (interactive)
-  (flyspell-goto-next-error)
-  (ispell-word)
-  )
-
-;; Spell check comments in c++ and c common
-(add-hook 'c++-mode-hook  'flyspell-prog-mode)
-(add-hook 'c-mode-common-hook 'flyspell-prog-mode)
-
-;; Enable flyspell in text mode
-(if (fboundp 'prog-mode)
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-  (dolist (hook '(lisp-mode-hook emacs-lisp-mode-hook scheme-mode-hook
-                  clojure-mode-hook ruby-mode-hook yaml-mode
-                  python-mode-hook shell-mode-hook php-mode-hook
-                  css-mode-hook haskell-mode-hook caml-mode-hook
-                  nxml-mode-hook crontab-mode-hook perl-mode-hook
-                  tcl-mode-hook javascript-mode-hook))
-    (add-hook hook 'flyspell-prog-mode)))
-
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode -1))))
-
-
+(load "~/.emacs.d/ajt-vector-math.el")
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
@@ -195,8 +124,7 @@
 
 
 
-
-(load-theme 'solarized-dark t)
+(load-theme 'doom-one t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -204,10 +132,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+    ("227edf860687e6dfd079dc5c629cbfb5c37d0b42a3441f5c50873ba11ec8dfd2" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "bb08c73af94ee74453c90422485b29e5643b73b05e8de029a6909af6a3fb3f58" "cdf96318f1671344564ba74ef75cc2a3f4692b2bee77de9ce9ff5f165de60b1f" "a4bd55761752bddac75bad0a78f8c52081a1effb33b69354e30a64869b5a40b9" default)))
  '(package-selected-packages
    (quote
-    (chicken-scheme yasnippet writegood-mode window-numbering web-mode vlf solarized-theme rtags markdown-mode magit hungry-delete helm-ls-hg helm-ls-git helm-flyspell helm-flycheck helm-ctest helm flycheck-pyflakes flycheck-irony flycheck dash company-irony-c-headers counsel-projectile flyspell-correct-ivy counsel company-irony company cmake-mode cmake-ide autopair auto-complete auctex async))))
+    (color-theme-sanityinc-tomorrow darktooth-theme doom-themes yasnippet writegood-mode window-numbering web-mode vlf soothe-theme solarized-theme rtags qml-mode markdown-mode magit hungry-delete helm-ls-hg helm-ls-git helm-flyspell helm-flycheck helm-ctest flyspell-correct-ivy flycheck-pyflakes flycheck-irony counsel-projectile company-irony-c-headers company-irony cmake-mode cmake-ide autopair auto-complete auctex ample-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
