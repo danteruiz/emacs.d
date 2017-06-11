@@ -55,13 +55,15 @@
 
 
 ;; Add these to the PATH so that proper executables are found
-(setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
-(setenv "PATH" (concat (getenv "PATH") ":/usr/bin"))
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/texbin")))
-(setq exec-path (append exec-path '("/usr/bin")))
-(setq exec-path (append exec-path '("/usr/local/bin")))
-
+(when window-system 
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/texbin"))
+  (setenv "PATH" (concat (getenv "PATH") "C:/cygwin/bin"))
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setq exec-path (append exec-path '("/usr/texbin")))
+  (setq exec-path (append exec-path '("/usr/bin")))
+  (setq exec-path (append exec-path '("/usr/local/bin"))))
+  
+  
 (package-initialize)
 ;; list the packages you want
 (defvar package-list)
@@ -74,44 +76,13 @@
   (unless (package-installed-p package)
     (package-install package)))
 
-(defun dts-switch-between-header-and-source ()
-  "Switch between a c/c++ header (.h) and its corresponding source (.c/.cpp)."
-  (interactive)
-  ;; grab the base of the current buffer's file name
-  (setq bse (file-name-sans-extension buffer-file-name))
-  ;; and the extension, converted to lowercase so we can
-  ;; compare it to "h", "c", "cpp", etc
-  (setq ext (downcase (file-name-extension buffer-file-name)))
-  ;; This is like a c/c++ switch statement, except that the
-  ;; conditions can be any true/false evaluated statement
-  (cond
-   ;; first condition - the extension is "h"
-   ((equal ext "h")
-    ;; first, look for bse.c
-    (setq nfn (concat bse ".c"))
-    (if (file-exists-p nfn)
-	;; if it exists, either switch to an already-open
-	;;  buffer containing that file, or open it in a new buffer
-	(find-file nfn)
-      ;; this is the "else" part - note that if it is more than
-      ;;  one line, it needs to be wrapped in a (progn )
-      (progn
-	;; look for a bse.cpp
-	(setq nfn (concat bse ".cpp"))
-	;; likewise
-	(find-file nfn)
-	)
-      )
-    )
-   ;; second condition - the extension is "c" or "cpp"
-   ((or (equal ext "cpp") (equal ext "c"))
-    ;; look for a corresponding bse.h
-    (setq nfn (concat bse ".h"))
-    (find-file nfn)
-    )
-   )
-  )
-(global-set-key (kbd "C-c s") 'dts-switch-between-header-and-source)
+(add-to-list 'load-path "~/.emacs.d/libraries")
+(add-to-list 'load-path "~/.emacs.d/")
+
+(load "header-and-source-switch")
+(load "setup-exec-paths")
+
+(load "reload-init.el")
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
@@ -121,6 +92,9 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/moe-theme/")
 (add-to-list 'load-path "~/.emacs.d/moe-theme.el/")
 (require 'moe-theme)
+
+(defun test()
+  (save-buffers-kill-emacs))
 
 (add-hook 'before-save-hook 'white-space-cleanup)
 (add-hook 'c++-mode-hook
