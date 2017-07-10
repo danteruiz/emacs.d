@@ -56,7 +56,7 @@
 (package-initialize)
 ;; list the packages you want
 (defvar package-list)
-(setq package-list '(doom-themes moe-theme qml-mode))
+(setq package-list '(doom-themes moe-theme qml-mode flymake))
 ;; fetch the list of packages available
 (unless package-archive-contents
   (package-refresh-contents))
@@ -71,20 +71,18 @@
 (load "setup-exec-paths")
 (load "header-and-source-switch")
 (load "reload-init.el")
+(load "csharp-mode")
+
+(require 'csharp-mode)
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.cpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
+(add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/moe-theme/")
-(add-to-list 'load-path "~/.emacs.d/moe-theme.el/")
-(require 'moe-theme)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-(defun test()
-  (save-buffers-kill-emacs))
-
-(add-hook 'before-save-hook 'white-space-cleanup)
 (add-hook 'c++-mode-hook
 	  '(lambda ()
 
@@ -114,13 +112,13 @@
 	     ;; make open-braces after a case
 	     (c-set-offset 'case-label '+)
 	     ))
-(load-theme 'moe-dark t)
+(load-theme 'noctilux t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (qml-mode moe-theme doom-themes))))
+ '(package-selected-packages (quote (magit rainbow-mode qml-mode moe-theme doom-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
