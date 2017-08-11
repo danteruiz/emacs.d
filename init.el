@@ -48,7 +48,7 @@
 
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+	     '("melpa" . "http://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -66,6 +66,7 @@
     (package-install package)))
 
 (add-to-list 'load-path "~/.emacs.d/libraries")
+(add-to-list 'load-path "~/.emacs.d/themes/")
 
 (load "system")
 (load "setup-exec-paths")
@@ -112,13 +113,18 @@
 	     ;; make open-braces after a case
 	     (c-set-offset 'case-label '+)
 	     ))
-(load-theme 'noctilux t)
+(load-theme 'tomorrow-night-blue t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (magit rainbow-mode qml-mode moe-theme doom-themes))))
+ '(custom-safe-themes
+   (quote
+    ("7f1263c969f04a8e58f9441f4ba4d7fb1302243355cb9faecb55aec878a06ee9" default)))
+ '(package-selected-packages
+   (quote
+    (lua-mode magit rainbow-mode qml-mode moe-theme doom-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
