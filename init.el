@@ -43,9 +43,12 @@
 (setq system-time-locale "en_US")
 
 (require 'package)
+(defvar elpa-archives
+  '(("mepla" . "melpa.org/packages/")
+    ("org" . "orgmode.org/elpa")
+    ("gnu" . "elpa.gnu.org/packages/"))
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 
@@ -71,22 +74,32 @@
   (compilation-mode))
 
 (load-file (concat start-directory "lisp/layers/c-c++.el"))
-(add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
+(load-file (concat start-directory "lisp/layers/qml.el"))
+(load-file (concat start-directory "lisp/layers/better-editing.el"))
+(load-file (concat start-directory "lisp/layers/source-control.el"))
+
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 
 (add-to-list 'custom-theme-load-path (concat start-directory "themes/"))
 
-(add-hook 'qml-mode-hook
-          '(lambda ()
-             (setq tab-width 4)
-             (setq indent-tabs-mode nil)
-             ))
-
+;; js mode hook
 (add-hook 'js-mode-hook
 	  '(lambda ()
 	     (setq tab-width 4)
 	     (setq indent-tabs-mode nil)
 	     ))
 
-(load-theme 'solarized-dark t)
-(setq default-directory "C:Users/dante/")
+(load-theme 'material t)
+(setq default-directory "C:Users/Dante/")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (magit with-editor use-package magit-popup))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
