@@ -7,8 +7,7 @@
 
 (defun install-packages (list)
   ;; fetch list of packages avilable
-  (unless package-archive-contents
-    (package-refresh-contents))
+  (package-refresh-contents)
 
   (dolist (package list)
     (unless (package-installed-p package)
