@@ -55,15 +55,13 @@
 
 (eval-when-compile
   (require 'use-package))
-(require 'diminish)
-(require 'bind-key)
 
 (load-file (concat (file-name-directory load-file-name)
                    "lisp/libraries/load-paths.el"))
 
 (require 'utils)
 
-(add-to-list 'load-path "~/.emacs.d/themes/")
+(add-to-list 'load-path (concat start-directory "themes/"))
 
 
 (defun ajt-eslint ()
@@ -72,11 +70,11 @@
   (pop-to-buffer "*eslint-log*")
   (compilation-mode))
 
-(load-file "emacs.d/layers/c-c++.el")
+(load-file (concat start-directory "lisp/layers/c-c++.el"))
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.cs\\'" . csharp-mode))
 
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(add-to-list 'custom-theme-load-path (concat start-directory "themes/"))
 
 (add-hook 'qml-mode-hook
           '(lambda ()
@@ -91,3 +89,4 @@
 	     ))
 
 (load-theme 'solarized-dark t)
+(setq default-directory "C:Users/dante/")

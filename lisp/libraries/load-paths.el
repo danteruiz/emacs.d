@@ -5,7 +5,7 @@
     (add-to-load-path dir)))
 
 (defvar start-directory
-  "~/emacs.d/")
+  user-emacs-directory)
 
 (defconst lisp-directory
   (expand-file-name (concat start-directory "lisp/")))
