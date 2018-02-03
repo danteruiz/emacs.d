@@ -16,3 +16,5 @@
 (mapc 'add-to-load-path
       `(
         ,lib-directory))
+
+(add-to-list 'load-path (concat start-directory "themes/"))
