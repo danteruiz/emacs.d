@@ -4,9 +4,11 @@
 (require 'utils)
 (require 'package)
 
+(defvar layer-directory (concat start-directory "lisp/layers/"))
+
 (defvar elpa-archives
   '(("mepla" . "melpa.org/packages/")
-    ("org" . "orgmode.org/elpa")
+    ;;("org" . "orgmode.org/elpa")
     ("gnu" . "elpa.gnu.org/packages/")))
 
 (defun configure/initialize ()
@@ -56,6 +58,52 @@
   (setq delete-old-versions t)
   (setq backup-by-copying t)
   (setq auto-save-default nil)
-)
+  )
 
+(defun configure/package-archive-absolute-pathp (archive)
+  "Return t if ARCHIVE has an absolute path defined."
+  (let ((path (cdr archive)))
+    (or (string-match-p "http" path)
+        (string-prefix-p "~" path)
+        (string-prefix-p "/" path))))
+
+(defun configure/resolve-package-archives (archives)
+  (mapcar
+   (lambda (x)
+     (let ((aname (car x))
+	   (apath (cdr x)))
+       (cons aname
+	     (if (configure/package-archive-absolute-pathp x)
+		 apath
+	       (concat
+		(if (and elpa-https
+			 (not emacs-insecure)
+			 (not (equal "org" aname)))
+		    "https://"
+		  "http://")
+		apath)))))
+   archives))
+
+(defun configure/archive-packages ()
+  (setq package-archives (configure/resolve-package-archives
+			  elpa-archives))
+  (setq package-enable-at-startup nil)
+  (package-initialize)
+  (package-refresh-contents)
+  (configure/initialize-use-package)
+  )
+
+(defun configure/initialize-use-package ()
+  (unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+  (eval-when-compile
+    (require 'use-package))
+  )
+(defun configure/load-layers ()
+  (setq files (delete "." (delete ".." (directory-files (concat start-directory "lisp/layers/")))))
+  (dolist (file files)
+    (load-file (concat layer-directory file)))
+  
+  )
 (provide 'configure)
