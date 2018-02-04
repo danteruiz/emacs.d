@@ -18,3 +18,4 @@
         ,lib-directory))
 
 (add-to-list 'load-path (concat start-directory "themes/"))
+(add-to-list 'custom-theme-load-path (concat start-directory "themes/"))
