@@ -2,7 +2,7 @@
 ;; slack
 ;;
 
-
+(require 'utils)
 (defvar slack-packages
   '(
     slack

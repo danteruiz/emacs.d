@@ -6,9 +6,6 @@
   (eq system-type 'darwin))
 
 (defun install-packages (list)
-  ;; fetch list of packages avilable
-  (package-refresh-contents)
-
   (dolist (package list)
     (unless (package-installed-p package)
       (package-install package))))
