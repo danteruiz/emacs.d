@@ -1,6 +1,7 @@
 ;;
 ;; emacs-base configureation files
 ;;
+(require 'use-package)
 
 
 (use-package whitespace
@@ -14,20 +15,9 @@
 			    :background
 			    (face-attribute 'font-lock-comment-face
 					    :foreground))
-	(setq show-trailing-whitespace 1)))
+	(setq whitespace-style '(face trailing tabs spaces))
+	(setq show-trailing-whitespace t)))
 
     (add-hook 'prog-mode-hook 'emacs/show-trailing-whitespace)
     )
-
-    :config
-    (progn
-      (set-face-attribute 'whitespace-space nil
-                          :background nil
-                          :foreground (face-attribute 'font-lock-warning-face
-                                                      :foreground))
-      (set-face-attribute 'whitespace-tab nil
-                          :background nil)
-      (set-face-attribute 'whitespace-indentation nil
-                          :background nil)
-      )
-    )
+  )

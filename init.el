@@ -3,11 +3,13 @@
 (setq emacs-insecure t)
 (load-file (concat (file-name-directory load-file-name)
                    "lisp/libraries/load-paths.el"))
+(require 'utils)
 (require 'configure)
 (configure/initialize)
 (configure/archive-packages)
 (configure/load-layers)
-
+(when (system-is-windows)
+    (setq default-directory "C:Users/Dante/"))
 (load-theme 'adwaita t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

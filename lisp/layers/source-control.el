@@ -1,6 +1,7 @@
 (defvar source-control-packages
   '(
-    magit))
+    magit
+    magit-gitflow))
 
 
 (install-packages source-control-packages)

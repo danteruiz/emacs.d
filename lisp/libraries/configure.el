@@ -43,7 +43,7 @@
     "My emacs storage area for persistent files.")
   ;; create the `user-cache-directory' if not exists
   (make-directory user-cache-directory t)
-  
+
   (let ((backup-dir (concat user-cache-directory "backup")))
     ;; Move backup file to `~/.emacs.d/.cache/backup'
     (setq backup-directory-alist `(("." . ,backup-dir)))
@@ -100,10 +100,10 @@
   (eval-when-compile
     (require 'use-package))
   )
+
 (defun configure/load-layers ()
   (setq files (delete "." (delete ".." (directory-files (concat start-directory "lisp/layers/")))))
   (dolist (file files)
     (load-file (concat layer-directory file)))
-  
   )
 (provide 'configure)
