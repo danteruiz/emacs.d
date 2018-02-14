@@ -1,7 +1,7 @@
 ;;c-c++ configureation layers
 (require 'utils)
 (defvar c-c++-packages
-      '(cc-mode))
+  '(cc-mode))
 
 (install-packages c-c++-packages)
 

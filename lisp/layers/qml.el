@@ -1,3 +1,8 @@
+(defvar qml-packages
+  '(qml-mode))
+
+(install-packages qml-packages)
+
 (add-to-list 'auto-mode-alist '("\\.qml\\'" . qml-mode))
 (add-hook 'qml-mode-hook
 	  '(lambda ()
