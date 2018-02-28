@@ -9,5 +9,6 @@
 (configure/archive-packages)
 (configure/load-layers)
 (when (system-is-windows)
-    (setq default-directory "C:Users/Dante/"))
+  (setq default-directory "C:Users/Dante/")
+  (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (load-theme 'solarized t)
