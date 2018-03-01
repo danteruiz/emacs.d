@@ -11,4 +11,6 @@
 (when (system-is-windows)
   (setq default-directory "C:Users/Dante/")
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
 (load-theme 'solarized t)
