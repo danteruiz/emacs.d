@@ -3,6 +3,7 @@
 (defvar csharp-packages
   '(
     csharp-mode
+    omnisharp
     ))
 
 (install-packages csharp-packages)

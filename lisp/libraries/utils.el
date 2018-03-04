@@ -8,6 +8,7 @@
 (defun install-packages (list)
   (dolist (package list)
     (unless (package-installed-p package)
+      (message "installing package..." package)
       (package-install package))))
 
 (provide 'utils)
