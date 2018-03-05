@@ -7,6 +7,7 @@
     auto-yasnippet
     ))
 
+(install-packages auto-complete-packages)
 (use-package auto-complete
   :defer t
   :init
@@ -27,9 +28,4 @@
 	  company-minimum-prefix-length 2
 	  company-require-match nil
 	  company-dabbrev-ignore-case nil
-	  campany-dabbrev-downcase nil))
-  (add-hook 'company-completion-started-hook 'company-turn-off-fci)
-  (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
-  (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))
-
-
+	  campany-dabbrev-downcase nil)))
