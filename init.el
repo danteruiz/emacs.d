@@ -21,4 +21,4 @@
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
-(load-theme 'base16-solarflare t)
+(load-theme 'solarized t)

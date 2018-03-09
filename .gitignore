@@ -12,4 +12,6 @@ my-layers.el
 
 .[Cc]ask/
 .[Cc]ache/
+projectile-bookmarks.eld
+projectile.cache
 custom.el

@@ -10,7 +10,7 @@
   (setq tab-width 4)
   (setq indent-tabs-mode nil)
   (js2-imenu-extras-mode)
-  (setq flycheck-check-syntax-automatically '(save idle-change))
+  (setq flycheck-check-syntax-automatically '(save))
   (flycheck-mode))
 
 
