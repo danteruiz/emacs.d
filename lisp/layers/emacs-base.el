@@ -6,6 +6,8 @@
 (defvar emacs-base-packages
   '(
     projectile
+    ivy
+    counsel-projectile
     ))
 
 (install-packages emacs-base-packages)
@@ -29,7 +31,6 @@
 (use-package projectile
   :init
   (progn
-    (setq projectile-completeion-system 'default)
     (setq projectile-globally-ignored-directories
 	  (append
 	   '(
