@@ -8,6 +8,7 @@
     projectile
     ivy
     counsel-projectile
+    undo-tree
     ))
 
 (install-packages emacs-base-packages)
@@ -28,7 +29,7 @@
     (add-hook 'prog-mode-hook 'emacs/show-trailing-whitespace)))
 
 
-(use-package projectile
+(use-package counsel-projectile
   :init
   (progn
     (setq projectile-globally-ignored-directories
@@ -36,6 +37,7 @@
 	   '(
 	     "build"
 	     ".git"
+	     ".meta"
 	     "x64"
 	     "andriod"
 	     "server-console"
@@ -56,7 +58,13 @@
     )
   :config
   (progn
-    (projectile-global-mode)))
+    (counsel-projectile-mode)))
+
+
+(use-package undo-tree
+  :init
+  (global-undo-tree-mode)
+  (setq undo-tree-visualizer-timestamps t))
 
 
 (defun reload-init ()

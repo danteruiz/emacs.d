@@ -1,16 +1,12 @@
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (package-initialize)
 
 (setq load-prefer-newer t)
-(setq elpa-https nil)
-(setq emacs-insecure t)
+(defvar elpa-https nil)
+(defvar emacs-insecure t)
 (load-file (concat (file-name-directory load-file-name) "my-layers.el"))
 (load-file (concat (file-name-directory load-file-name)
                    "lisp/libraries/load-paths.el"))
+
 (require 'benchmark-init-loaddefs)
 (require 'utils)
 (require 'configure)
