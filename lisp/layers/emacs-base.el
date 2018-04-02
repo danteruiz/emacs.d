@@ -66,7 +66,6 @@
   (global-undo-tree-mode)
   (setq undo-tree-visualizer-timestamps t))
 
-
 (defun reload-init ()
   (interactive)
   (load-file "~/.emacs.d/init.el"))

@@ -58,6 +58,7 @@
   (setq delete-old-versions t)
   (setq backup-by-copying t)
   (setq auto-save-default nil)
+  (global-auto-revert-mode 1)
   )
 
 (defun configure/package-archive-absolute-pathp (archive)
