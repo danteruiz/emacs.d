@@ -15,6 +15,8 @@
 (configure/archive-packages)
 (configure/load-layers my-layers)
 (when (system-is-windows)
+  (require 'fakecygpty)
+  (fakecygpty-activate)
   (setq default-directory "C:Users/Dante/")
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (setq custom-file "~/.emacs.d/custom.el")
