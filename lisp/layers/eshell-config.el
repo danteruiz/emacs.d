@@ -6,6 +6,9 @@
   :defer t
   :config
   (progn
+    (ansi-color-for-comint-mode-on)
+    (add-hook 'eshell-preoutput-filter-functions
+	      'ansi-color-filter-apply)
     (message "Configuring"))
 
   :init
