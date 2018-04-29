@@ -2,6 +2,10 @@
   '(
     magit
     magit-gitflow
+    git-timemachine
+    git-messenger
+    git-link
+    orgit
     git-gutter
     git-gutter+
     git-gutter-fringe
@@ -9,19 +13,6 @@
 
 
 (install-packages source-control-packages)
-
-;;(defface git-gutter+-added
-;;  '((t (:foreground "green" :weight bold)))
-;;  :group 'git-gutter+)
-
-;;(defface git-gutter+-deleted
-;; '((t (:foreground "red" :weight bold)))
-;;  :group 'git-gutter+)
-
-;;(defface git-gutter+-modified
-;;  '((t (:foreground "magenta" :weight bold)))
-;;  "face for modified lines"
-;;  :group 'git-gutter+)
 
 (use-package git-gutter+
   :commands (global-git-gutter+-mode git-gutter+-mode)
@@ -35,3 +26,34 @@
      git-gutter+-deleted-sign "-"
      git-gutter+-diff-option "-w"
      git-gutter+-hide-gutter t)))
+
+(use-package git-gutter-fringe+
+  :commands git-gutter+-mode
+  :init
+  (progn
+    (with-eval-after-load 'git-gutter+
+      (require 'git-gutter-fringe+))
+    (setq git-gutter-fr+-side 'right-fringe))
+  :config
+  (progn
+    (fringe-helper-define 'git-gutter-fr+-added nil
+        "..X...."
+        "..X...."
+        "XXXXX.."
+        "..X...."
+        "..X...."
+        )
+      (fringe-helper-define 'git-gutter-fr+-deleted nil
+        "......."
+        "......."
+        "XXXXX.."
+        "......."
+        "......."
+        )
+      (fringe-helper-define 'git-gutter-fr+-modified nil
+        "..X...."
+        ".XXX..."
+        "XX.XX.."
+        ".XXX..."
+        "..X...."
+        )))
