@@ -19,4 +19,4 @@
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
-(load-theme 'gruvbox-dark-hard t)
+(load-theme 'green-phosphor t)
