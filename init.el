@@ -5,7 +5,7 @@
 (defvar emacs-insecure t)
 (load-file (concat (file-name-directory load-file-name) "my-layers.el"))
 (load-file (concat (file-name-directory load-file-name)
-                   "lisp/libraries/load-paths.el"))
+                   "lisp/core/load-paths.el"))
 
 (require 'benchmark-init-loaddefs)
 (require 'utils)
@@ -19,4 +19,4 @@
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
-(load-theme 'green-phosphor t)
+(load-theme 'rebecca t)

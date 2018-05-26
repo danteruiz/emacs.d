@@ -13,9 +13,13 @@
 (defconst lib-directory
   (expand-file-name (concat lisp-directory "libraries/")))
 
+(defconst core-directory
+  (expand-file-name (concat lisp-directory "core/")))
+
 (mapc 'add-to-load-path
       `(
-        ,lib-directory))
+        ,lib-directory
+	,core-directory))
 
 (add-to-list 'load-path (concat start-directory "themes/"))
 (add-to-list 'custom-theme-load-path (concat start-directory "themes/"))

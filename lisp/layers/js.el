@@ -2,6 +2,7 @@
 (defvar javascript-packages
   '(
     js2-mode
+    company-tern
     ))
 
 (install-packages javascript-packages)
@@ -11,6 +12,9 @@
   (setq indent-tabs-mode nil)
   (js2-imenu-extras-mode)
   (setq flycheck-check-syntax-automatically '(save))
+  (add-to-list 'company-backends 'company-tern)
+  (tern-mode)
+  (company-mode)
   (flycheck-mode))
 
 
