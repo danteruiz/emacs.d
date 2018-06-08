@@ -14,4 +14,5 @@ my-layers.el
 .[Cc]ache/
 projectile-bookmarks.eld
 projectile.cache
+.last-package-update-key
 custom.el
