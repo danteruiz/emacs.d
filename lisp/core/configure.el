@@ -19,6 +19,7 @@
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)
   (setq initial-scratch-message "")
+  '(inhibit-double-buffering . t)
   ;; extra things
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq visible-bell t)
