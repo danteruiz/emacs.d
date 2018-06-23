@@ -11,4 +11,8 @@
       (message "installing package..." package)
       (package-install package))))
 
+(defun add-to-mode (mode lst)
+  (dolist file lst)
+  (add-to-list 'auto-mode-alist (cons file mode)))
+
 (provide 'utils)
