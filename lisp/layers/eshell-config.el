@@ -2,13 +2,6 @@
 (defun eshell/custom-prompt ()
   )
 
-
-
-
-(defun eshell-hook ()
-  (eshell/alias "clear" "clear t"))
-
-
 (use-package eshell
   :defer t
   :config
@@ -26,6 +19,4 @@
 	  eshell-hist-ignoredups t
 	  eshell-save-history-on-exit t
 	  eshell-prefer-lisp-functions nil)
-
-    (add-hook 'eshell-mode-hook 'eshell-hook)
     ))
