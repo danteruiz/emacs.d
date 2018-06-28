@@ -24,5 +24,5 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
-(when (not 'is-window-system-nil)
-    (load-theme 'rebecca t))
+(when (not (is-system-window-nil))
+  (load-theme 'rebecca t))

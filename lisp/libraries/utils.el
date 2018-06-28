@@ -6,7 +6,7 @@
   (eq system-type 'darwin))
 
 (defun is-system-window-nil ()
-  (eq window-system 'nil))
+  (eq window-system nil))
 
 (defun install-packages (list)
   (dolist (package list)
