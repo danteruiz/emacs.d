@@ -5,6 +5,9 @@
 (defun system-is-mac ()
   (eq system-type 'darwin))
 
+(defun is-system-window-nil ()
+  (eq window-system nil))
+
 (defun install-packages (list)
   (dolist (package list)
     (unless (package-installed-p package)

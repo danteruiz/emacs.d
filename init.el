@@ -23,4 +23,6 @@
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
-(load-theme 'rebecca t)
+
+(when (not (is-system-window-nil))
+  (load-theme 'rebecca t))
