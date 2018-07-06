@@ -25,4 +25,4 @@
 (load custom-file 'noerror)
 
 (when (not (is-system-window-nil))
-  (load-theme 'rebecca t))
+  (load-theme 'madhat2r t))
