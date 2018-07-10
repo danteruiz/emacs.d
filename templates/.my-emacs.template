@@ -1,0 +1,3 @@
+(defconst my-layers '(emacs-base
+		      my-lisp
+		      better-editing))

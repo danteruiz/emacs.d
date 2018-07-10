@@ -3,7 +3,6 @@
 (setq load-prefer-newer t)
 (defvar elpa-https nil)
 (defvar emacs-insecure t)
-(load-file (concat (file-name-directory load-file-name) "my-layers.el"))
 (load-file (concat (file-name-directory load-file-name)
                    "lisp/core/load-paths.el"))
 
@@ -13,6 +12,7 @@
 (benchmark-init/activate)
 (configure/initialize)
 (configure/archive-packages)
+(configure/load-my-layers-file)
 (configure/load-layers my-layers)
 (when (system-is-windows)
   ;; clone and complie https://github.com/d5884/fakecygpty.
@@ -26,3 +26,6 @@
 
 (when (not (is-system-window-nil))
   (load-theme 'madhat2r t))
+
+(set-frame-parameter (selected-frame) 'alpha '(95 . 50))
+(add-to-list 'default-frame-alist '(alpha . (95 . 50)))

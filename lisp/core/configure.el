@@ -24,18 +24,15 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq visible-bell t)
   (prefer-coding-system 'utf-8)
-  (setq system-time-locale "en_US")
-  )
+  (setq system-time-locale "en_US"))
 
 (defun configure/remove-ui-elements ()
   (when (featurep 'menu-bar) (menu-bar-mode -1))
   (when (featurep 'tool-bar) (tool-bar-mode -1))
-  (when (featurep 'scroll-bar) (scroll-bar-mode -1))
-  )
+  (when (featurep 'scroll-bar) (scroll-bar-mode -1)))
 
 (defun configure/mouse-style ()
-  (blink-cursor-mode t)
-  )
+  (blink-cursor-mode t))
 
 (defun configure/backup-files ()
 
@@ -59,8 +56,7 @@
   (setq delete-old-versions t)
   (setq backup-by-copying t)
   (setq auto-save-default nil)
-  (global-auto-revert-mode 1)
-  )
+  (global-auto-revert-mode 1))
 
 (defun configure/package-archive-absolute-pathp (archive)
   "Return t if ARCHIVE has an absolute path defined."
@@ -92,16 +88,14 @@
   (setq package-enable-at-startup nil)
   (package-initialize)
   (package-refresh-contents)
-  (configure/initialize-use-package)
-  )
+  (configure/initialize-use-package))
 
 (defun configure/initialize-use-package ()
   (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 
   (eval-when-compile
-    (require 'use-package))
-  )
+    (require 'use-package)))
 
 (defun configure/load-layers (my-layers)
   (setq files (delete "." (delete ".." (directory-files (concat start-directory "lisp/layers/")))))
@@ -109,6 +103,12 @@
     (setq file (concat (format "%s" layer) ".el"))
     (setq file-path (concat layer-directory file))
     (when (file-exists-p file-path)
-      (load-file file-path)))
-  )
+      (load-file file-path))))
+
+(defun configure/load-my-layers-file ()
+  (defvar my-layers-file (concat start-directory "my-layers.el"))
+  (when (not (file-exists-p my-layers-file))
+    (copy-file (concat template-directory ".my-emacs.template") my-layers-file))
+
+  (load-file my-layers-file))
 (provide 'configure)
