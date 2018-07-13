@@ -1,5 +1,5 @@
 ;; auto-complete
-(defvar auto-complete-packages
+(setq auto-complete-packages
   '(
     auto-complete
     company
@@ -29,3 +29,16 @@
 	  company-require-match nil
 	  company-dabbrev-ignore-case nil
 	  campany-dabbrev-downcase nil)))
+
+
+(defun auto-complete/init-company ()
+  (message "auto-complete/init-comapny"))
+
+(defun auto-complete/init-auto-complete ()
+  (message "auto-complete/init-auto-complete"))
+
+(defun auto-complete/init-yasnippet ()
+  (message "auto-comeplete/init-yasnippet"))
+
+(defun auto-complete/init-auto-yasnippet ()
+  (message "auto-complete/init-auto-yasnippet"))

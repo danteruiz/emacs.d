@@ -13,6 +13,9 @@
 (defconst lib-directory
   (expand-file-name (concat lisp-directory "libraries/")))
 
+(defconst template-directory
+  (expand-file-name (concat start-directory "templates/")))
+
 (defconst core-directory
   (expand-file-name (concat lisp-directory "core/")))
 
