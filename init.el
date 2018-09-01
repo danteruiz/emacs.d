@@ -19,7 +19,7 @@
   ;; copy exe to path
   (require 'fakecygpty)
   (fakecygpty-activate)
-  (setq default-directory "C:Users/Dante/")
+  (setq default-directory (getenv "HOME"))
   (load-file "~/.emacs.d/themes/solarized-definitions.el"))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
