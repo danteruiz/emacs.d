@@ -17,6 +17,8 @@
     (setq eshell-scroll-to-bottom-on-input 'all
 	  eshell-error-if-no-glob t
 	  eshell-hist-ignoredups t
-	  eshell-save-history-on-exit t
+	  eshell-save-history-on-exit nil
 	  eshell-prefer-lisp-functions nil)
-    ))
+    (add-hook 'eshell-mode-hook
+	      (lambda ()
+		(eshell/alias "clear" "clear t")))))

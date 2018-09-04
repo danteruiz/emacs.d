@@ -22,6 +22,7 @@
   '(inhibit-double-buffering . t)
   ;; extra things
   (defalias 'yes-or-no-p 'y-or-n-p)
+  (setq-default cursor-type 'bar)
   (setq visible-bell t)
   (prefer-coding-system 'utf-8)
   (setq system-time-locale "en_US"))
