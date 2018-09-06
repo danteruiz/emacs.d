@@ -1,6 +1,7 @@
 ;; themes.el
 (require 'utils)
-(defvar themes-packages '(spacemacs-theme
+(defvar themes-packages '(material-theme
+			  spacemacs-theme
 			  doom-themes))
 
 
