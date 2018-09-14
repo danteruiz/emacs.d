@@ -9,6 +9,7 @@
     ivy
     counsel-projectile
     undo-tree
+    which-key
     ))
 
 (install-packages emacs-base-packages)
@@ -58,6 +59,7 @@
     )
   :config
   (progn
+    (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
     (counsel-projectile-mode)))
 
 
@@ -65,6 +67,11 @@
   :init
   (global-undo-tree-mode)
   (setq undo-tree-visualizer-timestamps t))
+
+(use-package which-key
+  :config
+  (progn
+    (which-key-mode)))
 
 (defun reload-init ()
   (interactive)
