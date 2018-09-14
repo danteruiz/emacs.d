@@ -1,7 +1,12 @@
 # TernConverter.py
-import os, json
+import sys
+import json
+
+
 def parseJSDocJson(JSDoc):
-    
+    print JSDoc
+
+
 def main():
     argsLength = len(sys.argv)
     if argsLength == 3:
@@ -13,6 +18,7 @@ def main():
 
         ternJson = parseJSDocJson(jsonData)
 
-        #write out to file
+        # write out to file
+
 
 main()
