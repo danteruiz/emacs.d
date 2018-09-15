@@ -1,4 +1,6 @@
 ;; my eshell config
+(require 'eshell)
+(require 'em-smart)
 (defun eshell/custom-prompt ()
   )
 
@@ -6,17 +8,11 @@
   :defer t
   :config
   (progn
-    (ansi-color-for-comint-mode-on)
-    (add-hook 'eshell-preoutput-filter-functions
-	      'ansi-color-filter-apply)
+    (setq eshell-where-to-jump 'begin)
+    (setq eshell-review-quick-commands nil)
+    (setq eshell-smart-space-goes-to-end t)
     (message "Configuring"))
 
   :init
   (progn
-    (message "intiial eshell configuration")
-    (setq eshell-scroll-to-bottom-on-input 'all
-	  eshell-error-if-no-glob t
-	  eshell-hist-ignoredups t
-	  eshell-save-history-on-exit t
-	  eshell-prefer-lisp-functions nil)
-    ))
+    (message "intiial eshell")))
