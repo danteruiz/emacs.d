@@ -15,7 +15,6 @@
   (add-to-list 'company-backends 'company-tern)
   (tern-mode)
   (company-mode)
-  (setq tern-command (append tern-command '("--no-port-file")))
   (flycheck-mode))
 
 

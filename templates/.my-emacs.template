@@ -1,4 +1,5 @@
-(defconst my-layers '(auto-complete
+(defconst my-layers '(themes
+                      auto-complete
 	              emacs-base
 		      my-lisp
 		      better-editing))
