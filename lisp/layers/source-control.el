@@ -1,6 +1,5 @@
 (defvar source-control-packages
-  '(
-    magit
+  '(magit
     magit-gitflow
     git-timemachine
     git-messenger
@@ -56,4 +55,4 @@
         "XX.XX.."
         ".XXX..."
         "..X...."
-        )))
+	)))
