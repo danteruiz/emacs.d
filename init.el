@@ -19,10 +19,10 @@
   ;; copy exe to path
   (require 'fakecygpty)
   (fakecygpty-activate)
-  (setq default-directory (getenv "HOME"))
-  (load-file "~/.emacs.d/themes/solarized-definitions.el"))
+  (setq default-directory (getenv "HOME")))
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file 'noerror)
 
 (when (not (is-system-window-nil))
-  (load-theme 'material t))
+  (require 'kaolin-themes)
+  (load-theme 'kaolin-ocean t))
