@@ -15,6 +15,7 @@
   (configure/remove-ui-elements)
   (configure/mouse-style)
   (configure/backup-files)
+  (configure/hack-font)
 
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)
@@ -25,6 +26,10 @@
   (setq visible-bell t)
   (prefer-coding-system 'utf-8)
   (setq system-time-locale "en_US"))
+
+(defun configure/hack-font ()
+  (when (member "Hack" (font-family-list))
+    (set-face-attribute 'default nil :font "Hack")))
 
 (defun configure/remove-ui-elements ()
   (when (featurep 'menu-bar) (menu-bar-mode -1))
