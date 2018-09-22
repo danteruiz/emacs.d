@@ -1,11 +1,9 @@
 ;; auto-complete
 (setq auto-complete-packages
-  '(
-    auto-complete
+  '(auto-complete
     company
     yasnippet
-    auto-yasnippet
-    ))
+    auto-yasnippet))
 
 (install-packages auto-complete-packages)
 (use-package auto-complete
