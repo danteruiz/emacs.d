@@ -23,29 +23,11 @@
 	;; look for a bse.cpp
 	(setq nfn (concat bse ".cpp"))
 	;; likewise
-	(find-file nfn)
-	)
-      )
-    )
+	(find-file nfn))))
    ;; second condition - the extension is "c" or "cpp"
    ((or (equal ext "cpp") (equal ext "c"))
     ;; look for a corresponding bse.h
     (setq nfn (concat bse ".h"))
-    (find-file nfn)
-    )
-   )
-  )
+    (find-file nfn))))
+
 (global-set-key (kbd "C-c s") 'header-and-source-switch)
-
-
-
-
-
-
-
-
-
-
-
-
-
