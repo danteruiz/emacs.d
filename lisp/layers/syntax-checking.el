@@ -1,6 +1,7 @@
 ;; syntax-checking
 (defvar syntax-checking-packages
-  '(flycheck-pos-tip))
+  '(flycheck
+    flycheck-pos-tip))
 
 (install-packages syntax-checking-packages)
 

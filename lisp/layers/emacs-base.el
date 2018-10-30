@@ -4,13 +4,11 @@
 (require 'use-package)
 
 (defvar emacs-base-packages
-  '(
-    projectile
+  '(projectile
     ivy
     counsel-projectile
     undo-tree
-    which-key
-    ))
+    which-key))
 
 (install-packages emacs-base-packages)
 (use-package whitespace
@@ -35,8 +33,7 @@
   (progn
     (setq projectile-globally-ignored-directories
 	  (append
-	   '(
-	     "build"
+	   '("build"
 	     ".git"
 	     ".meta"
 	     "x64"
@@ -55,8 +52,7 @@
 	     "snapshot"
 	     "images"
 	     "mention-sounds"
-	     "visage")))
-    )
+	     "visage"))))
   :config
   (progn
     (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
