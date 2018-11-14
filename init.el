@@ -25,4 +25,4 @@
 
 (when (not (is-system-window-nil))
   (require 'kaolin-themes)
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'omtose-darker t))
