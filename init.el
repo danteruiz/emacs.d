@@ -24,5 +24,4 @@
 (load custom-file 'noerror)
 
 (when (not (is-system-window-nil))
-  (require 'kaolin-themes)
-  (load-theme 'omtose-darker t))
+  (load-theme 'spacemacs-dark t))
