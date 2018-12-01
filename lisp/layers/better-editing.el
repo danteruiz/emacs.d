@@ -1,3 +1,16 @@
+(defvar better-editing-packages
+  '(move-text
+    multiple-cursors))
+
+(install-packages better-editing-packages)
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(move-text-default-bindings)
+
 (defun header-and-source-switch ()
   "Switch between a c/c++ header (.h) and its corresponding source (.c/.cpp)."
   (interactive)

@@ -24,4 +24,4 @@
 (load custom-file 'noerror)
 
 (when (not (is-system-window-nil))
-  (load-theme 'spacemacs-dark t))
+  (load-theme 'adwaita t))
