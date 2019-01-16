@@ -25,3 +25,5 @@
 
 (when (not (is-system-window-nil))
   (load-theme 'adwaita t))
+
+(server-start)
