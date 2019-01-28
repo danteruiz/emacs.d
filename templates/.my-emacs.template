@@ -4,4 +4,4 @@
 		      my-lisp
 		      better-editing))
 
-(setq my-theme adwaita)
+(defvar my-theme 'adwaita)
