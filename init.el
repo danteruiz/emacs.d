@@ -24,6 +24,8 @@
 (load custom-file 'noerror)
 
 (when (not (is-system-window-nil))
-  (load-theme 'adwaita t))
+  (if (boundp 'my-theme)
+      (load-theme my-theme t)
+  (load-theme 'adwaita t)))
 
 (server-start)

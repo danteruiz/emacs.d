@@ -3,3 +3,5 @@
 	              emacs-base
 		      my-lisp
 		      better-editing))
+
+(setq my-theme adwaita)
