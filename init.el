@@ -28,4 +28,6 @@
       (load-theme my-theme t)
   (load-theme 'adwaita t)))
 
-(server-start)
+(if (and (fboundp 'server-running-p) 
+         (not (server-running-p)))
+    (server-start))

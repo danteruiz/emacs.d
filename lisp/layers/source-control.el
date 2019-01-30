@@ -13,6 +13,14 @@
 
 (install-packages source-control-packages)
 
+(use-package magit
+  :config
+  (progn
+    (bind-keys :map global-map
+	   :prefix-map my-prefix-map
+	   :prefix "M-m"
+	   ("gs" . magit-status))))
+
 (use-package git-gutter+
   :commands (global-git-gutter+-mode git-gutter+-mode)
   :init
@@ -54,5 +62,4 @@
         ".XXX..."
         "XX.XX.."
         ".XXX..."
-        "..X...."
-	)))
+        "..X....")))
