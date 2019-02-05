@@ -3,6 +3,7 @@
 ;;
 (require 'utils)
 (require 'package)
+(require 'benchmark-init-loaddefs)
 
 (defvar layer-directory (concat start-directory "lisp/layers/"))
 
@@ -12,6 +13,10 @@
     ("gnu" . "elpa.gnu.org/packages/")))
 
 (defun configure/initialize ()
+  (setq load-prefer-newer t)
+  (defvar elpa-https nil)
+  (defvar emacs-insecure t)
+ 
   (configure/remove-ui-elements)
   (configure/mouse-style)
   (configure/backup-files)
@@ -25,7 +30,16 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq visible-bell t)
   (prefer-coding-system 'utf-8)
-  (setq system-time-locale "en_US"))
+  (setq system-time-locale "en_US")
+  (setq custom-file "~/.emacs.d/custom.el")
+  (load custom-file 'noerror)
+
+  (configure/windows-special-settings)
+  (configure/archive-packages)
+  (configure/load-user-config-file)
+  (configure/load-layers my-layers)
+  (configure/start-emacs-server)
+  (configure/load-custom-theme))
 
 (defun configure/hack-font ()
   (when (member "Hack" (font-family-list))
@@ -110,10 +124,32 @@
     (when (file-exists-p file-path)
       (load-file file-path))))
 
-(defun configure/load-my-layers-file ()
+(defun configure/load-user-config-file ()
   (defvar my-layers-file (concat start-directory "my-layers.el"))
   (when (not (file-exists-p my-layers-file))
     (copy-file (concat template-directory ".my-emacs.template") my-layers-file))
 
   (load-file my-layers-file))
+
+(defun configure/call-user-post-init ())
+
+(defun configure/load-custom-theme ()
+  (when (not (is-system-window-nil))
+    (if (boundp 'my-theme)
+	(load-theme my-theme t)
+      (load-theme 'adwaita t))))
+
+(defun configure/start-emacs-server ()
+  (if (and (fboundp 'server-running-p) 
+           (not (server-running-p)))
+      (server-start)))
+
+(defun configure/windows-special-settings ()
+  (when (system-is-windows)
+  ;; clone and complie https://github.com/d5884/fakecygpty.
+  ;; copy exe to path
+  (require 'fakecygpty)
+  (fakecygpty-activate)
+  (setq default-directory (getenv "HOME"))))
+
 (provide 'configure)

@@ -1,3 +1,4 @@
+(require 'benchmark-init-loaddefs)
 (defun system-is-windows ()
   (eq system-type 'windows-nt))
 (defun system-is-linux ()
@@ -13,5 +14,8 @@
     (when (not (package-installed-p package))
       (message "installing package..." package)
       (package-install package))))
+
+(defun profile-startup ()
+  (benchmark-init/activate))
 
 (provide 'utils)
