@@ -5,6 +5,7 @@
 (defvar theme-packages
   '(kaolin-themes
     green-screen-theme
-    green-phosphor-theme))
+    green-phosphor-theme
+    dark-mint-theme))
 
 (install-packages theme-packages)

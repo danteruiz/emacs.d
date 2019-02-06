@@ -20,7 +20,6 @@
   (configure/remove-ui-elements)
   (configure/mouse-style)
   (configure/backup-files)
-  (configure/hack-font)
 
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)
@@ -39,7 +38,8 @@
   (configure/load-user-config-file)
   (configure/load-layers my-layers)
   (configure/start-emacs-server)
-  (configure/load-custom-theme))
+  (configure/load-custom-theme)
+  (configure/hack-font))
 
 (defun configure/hack-font ()
   (when (member "Hack" (font-family-list))
