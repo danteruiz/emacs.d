@@ -1,4 +1,3 @@
-
 ;;
 ;; configure emacs file
 ;;
@@ -64,10 +63,17 @@
 
   (let ((backup-dir (concat user-cache-directory "backup")))
     ;; Move backup file to `~/.emacs.d/.cache/backup'
-    (setq backup-directory-alist `(("." . ,backup-dir)))
+    (setq backup-directory-alist `((".*" . ,backup-dir)))
     ;; Makesure backup directory exist
     (when (not (file-exists-p backup-dir))
       (make-directory backup-dir t)))
+
+  ;; store all backup and autosave files in the tmp dir
+  (setq backup-directory-alist
+	`((".*" . ,temporary-file-directory)))
+  (setq auto-save-file-name-transforms
+	`((".*" ,temporary-file-directory t)))
+
 
   (setq delete-by-moving-to-trash nil)
   (setq version-control t)
@@ -75,6 +81,7 @@
   (setq kept-new-versions 20)
   (setq delete-old-versions t)
   (setq backup-by-copying t)
+  (setq make-backup-files nil)
   (setq auto-save-default nil)
   (global-auto-revert-mode 1))
 
