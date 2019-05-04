@@ -16,4 +16,5 @@
              (setq indent-tabs-mode nil)
              (setq c-continued-statemant-offset 2)
              (c-set-offset 'substatement-open 0)
+	     (c-set-offset 'inlambda 0)
              (c-set-offset 'case-label '+)))

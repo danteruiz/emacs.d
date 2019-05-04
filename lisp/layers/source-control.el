@@ -1,6 +1,5 @@
 (defvar source-control-packages
-  '(
-    magit
+  '(magit
     magit-gitflow
     git-timemachine
     git-messenger
@@ -13,6 +12,15 @@
 
 
 (install-packages source-control-packages)
+
+(use-package magit
+  :config
+  (progn
+    (bind-keys* :map global-map
+	       :prefix-map my-prefix-map
+	       :prefix "M-m"
+	       ("gs" . magit-status)
+	       ("gb" . magit-blame-addition))))
 
 (use-package git-gutter+
   :commands (global-git-gutter+-mode git-gutter+-mode)
@@ -55,5 +63,4 @@
         ".XXX..."
         "XX.XX.."
         ".XXX..."
-        "..X...."
-        )))
+        "..X....")))

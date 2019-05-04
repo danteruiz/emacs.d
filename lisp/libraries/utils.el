@@ -1,3 +1,4 @@
+(require 'benchmark-init-loaddefs)
 (defun system-is-windows ()
   (eq system-type 'windows-nt))
 (defun system-is-linux ()
@@ -10,12 +11,11 @@
 
 (defun install-packages (list)
   (dolist (package list)
-    (unless (package-installed-p package)
+    (when (not (package-installed-p package))
       (message "installing package..." package)
       (package-install package))))
 
-(defun add-to-mode (mode lst)
-  (dolist file lst)
-  (add-to-list 'auto-mode-alist (cons file mode)))
+(defun profile-startup ()
+  (benchmark-init/activate))
 
 (provide 'utils)

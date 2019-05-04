@@ -1,3 +1,16 @@
+(defvar better-editing-packages
+  '(move-text
+    multiple-cursors))
+
+(install-packages better-editing-packages)
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+(move-text-default-bindings)
+
 (defun header-and-source-switch ()
   "Switch between a c/c++ header (.h) and its corresponding source (.c/.cpp)."
   (interactive)
@@ -23,29 +36,11 @@
 	;; look for a bse.cpp
 	(setq nfn (concat bse ".cpp"))
 	;; likewise
-	(find-file nfn)
-	)
-      )
-    )
+	(find-file nfn))))
    ;; second condition - the extension is "c" or "cpp"
    ((or (equal ext "cpp") (equal ext "c"))
     ;; look for a corresponding bse.h
     (setq nfn (concat bse ".h"))
-    (find-file nfn)
-    )
-   )
-  )
+    (find-file nfn))))
+
 (global-set-key (kbd "C-c s") 'header-and-source-switch)
-
-
-
-
-
-
-
-
-
-
-
-
-

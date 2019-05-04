@@ -1,3 +1,7 @@
-(defconst my-layers '(emacs-base
+(defconst my-layers '(themes
+                      auto-complete
+	              emacs-base
 		      my-lisp
 		      better-editing))
+
+(defvar my-theme 'adwaita)
