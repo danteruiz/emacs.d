@@ -6,16 +6,10 @@
 
 
 (use-package org
-  :config
+  :init
   (progn
-    (bind-keys* :map global-map
-	       :prefix-map my-prefix-map
-	       :prefix "M-m"
-	       ("ol" . org-store-link)
-	       ("oa" . org-agenda)
-	       ("ob" . org-iswitchb))))
+    (add-to-list 'auto-mode-alist '("\\.org'" . org-mode))
+    (setq org-agenda-files (quote ("~/github/orgfiles")))))
 
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
-
-(setq org-agenda-files (quote ("~/git/orgfiles")))

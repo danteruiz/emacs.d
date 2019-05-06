@@ -9,6 +9,7 @@
     spacemacs-theme
     dark-mint-theme
     doom-themes
+    nimbus-theme
     darktooth-theme))
 
 (install-packages theme-packages)
