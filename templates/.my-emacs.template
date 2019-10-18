@@ -1,7 +1,6 @@
-(defconst my-layers '(themes
-                      auto-complete
+(defconst my-layers '(auto-complete
 	              emacs-base
 		      my-lisp
 		      better-editing))
 
-(defvar my-theme 'adwaita)
+(defvar my-theme 'doom-solarized-dark)
