@@ -1,5 +1,4 @@
 ;; shader.el
-
 (require 'utils)
 (defvar shader-packages
   '(glsl-mode))

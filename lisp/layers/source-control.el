@@ -17,10 +17,11 @@
   :config
   (progn
     (bind-keys* :map global-map
-	       :prefix-map my-prefix-map
-	       :prefix "M-m"
-	       ("gs" . magit-status)
-	       ("gb" . magit-blame-addition))))
+		:prefix-map source-control-prefix-map
+		:prefix-docstring "Magit"
+		:prefix "M-m"
+		("s" . magit-status)
+		("b" . magit-blame-addition))))
 
 (use-package git-gutter+
   :commands (global-git-gutter+-mode git-gutter+-mode)

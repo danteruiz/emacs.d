@@ -1,22 +1,20 @@
 ;; auto-complete
-(setq auto-complete-packages
+(defvar auto-complete-packages
   '(auto-complete
     company
     yasnippet
     auto-yasnippet))
-
 (install-packages auto-complete-packages)
-(use-package auto-complete
-  :defer t
-  :init
-  (setq ac-autos-start 0
-	ac-delay 0.2
-	ac-quick-help-delay 1.
-	ac-use-fuzzy t
-	ac-enable-fuzzy t
-	tab-always-indent 'complete
-	ac-dwin t))
-
+;;(use-package auto-complete
+;;:defer t
+;;:init
+;;(setq ac-autos-start 0
+;;	ac-delay 0.2
+;;	ac-quick-help-delay 1.
+;;	ac-use-fuzzy t
+;;	ac-enable-fuzzy t
+;;	tab-always-indent 'complete
+;;	ac-dwin t))
 
 (use-package company
   :defer t

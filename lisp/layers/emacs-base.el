@@ -1,6 +1,3 @@
-;;
-;; emacs-base configureation files
-;;
 (require 'use-package)
 
 (defvar emacs-base-packages
