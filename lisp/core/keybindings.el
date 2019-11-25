@@ -3,9 +3,14 @@
 ;;
 
 (define-prefix-command 'leader-prefix-map)
-(global-set-key (kdb "M-m") 'leader-prefix-map)
+(global-set-key (kbd "M-m") 'leader-prefix-map)
 
-(defun bind-prefix-keys(map ))
+(defun bind-prefix-keys(map &rest bindings)
+  (setq key (pop bindings) command (pop bindings))
 
+  (while key
+    (message "Key: %S Command: %S" key command)
+    (define-key map (kbd key) command)
+    (setq key (pop bindings) command (pop bindings))))
 
-https://stackoverflow.com/questions/1024374/how-can-i-make-c-p-an-emacs-prefix-key-for-develperlysense
+(provide 'keybindings)

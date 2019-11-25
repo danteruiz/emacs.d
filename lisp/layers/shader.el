@@ -3,10 +3,12 @@
 (defvar shader-packages
   '(glsl-mode))
 
-(install-packages c-c++-packages)
+(install-packages shader-packages)
 
-(add-to-list 'auto-mode-alist '("\\.fs\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.vs\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.fs\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.vs\\'" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'". glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.vert\\'" . glsl-mode))
 
 (add-hook 'glsl-mode-hook
 	  '(lambda ()

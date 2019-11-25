@@ -4,7 +4,7 @@
     git-timemachine
     git-messenger
     git-link
-    orgit
+    ;;orgit
     git-gutter
     git-gutter+
     git-gutter-fringe
@@ -16,12 +16,10 @@
 (use-package magit
   :config
   (progn
-    (bind-keys* :map global-map
-		:prefix-map source-control-prefix-map
-		:prefix-docstring "Magit"
-		:prefix "M-m"
-		("s" . magit-status)
-		("b" . magit-blame-addition))))
+    (message "magit-config")
+    (bind-prefix-keys 'leader-prefix-map
+		      "gs" 'magit-status
+		      "gb" 'magit-blame-addition)))
 
 (use-package git-gutter+
   :commands (global-git-gutter+-mode git-gutter+-mode)
@@ -46,22 +44,22 @@
   :config
   (progn
     (fringe-helper-define 'git-gutter-fr+-added nil
-        "..X...."
-        "..X...."
-        "XXXXX.."
-        "..X...."
-        "..X...."
-        )
-      (fringe-helper-define 'git-gutter-fr+-deleted nil
-        "......."
-        "......."
-        "XXXXX.."
-        "......."
-        "......."
-        )
-      (fringe-helper-define 'git-gutter-fr+-modified nil
-        "..X...."
-        ".XXX..."
-        "XX.XX.."
-        ".XXX..."
-        "..X....")))
+			  "..X...."
+			  "..X...."
+			  "XXXXX.."
+			  "..X...."
+			  "..X...."
+			  )
+    (fringe-helper-define 'git-gutter-fr+-deleted nil
+			  "......."
+			  "......."
+			  "XXXXX.."
+			  "......."
+			  "......."
+			  )
+    (fringe-helper-define 'git-gutter-fr+-modified nil
+			  "..X...."
+			  ".XXX..."
+			  "XX.XX.."
+			  ".XXX..."
+			  "..X....")))

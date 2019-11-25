@@ -2,6 +2,7 @@
   '(move-text
     multiple-cursors))
 
+
 (install-packages better-editing-packages)
 
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)

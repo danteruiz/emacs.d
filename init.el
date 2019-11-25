@@ -2,5 +2,6 @@
                      "lisp/core/load-paths.el"))
 (require 'utils)
 (require 'configure)
+(require 'keybindings)
 ;;(profile-startup)
 (configure/initialize)
