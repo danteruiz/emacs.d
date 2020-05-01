@@ -5,7 +5,8 @@
     ivy
     counsel-projectile
     undo-tree
-    which-key))
+    which-key
+    rainbow-delimiters))
 
 (install-packages emacs-base-packages)
 (use-package whitespace
@@ -25,6 +26,8 @@
     (add-hook 'prog-mode-hook 'emacs/show-trailing-whitespace)))
 
 
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (use-package counsel-projectile
   :init
   (progn
