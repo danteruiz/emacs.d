@@ -145,10 +145,12 @@
   (when (not (is-system-window-nil))
     (if (boundp 'my-theme)
 	(load-theme my-theme t)
-      (load-theme 'adwaita t))))
+      (load-theme 'adwaita t)))
+  (set-frame-parameter nil 'background-mode 'dark)
+  (enable-theme 'solarized))
 
 (defun configure/start-emacs-server ()
-  (if (and (fboundp 'server-running-p) 
+  (if (and (fboundp 'server-running-p)
            (not (server-running-p)))
       (server-start)))
 
