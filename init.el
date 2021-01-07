@@ -6,3 +6,4 @@
 ;;(profile-startup)
 (configure/initialize)
 (put 'upcase-region 'disabled nil)
+

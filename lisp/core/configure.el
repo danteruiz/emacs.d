@@ -43,7 +43,7 @@
 
 (defun configure/hack-font ()
   (when (member "Hack" (font-family-list))
-    (set-face-attribute 'default nil :font "Hack")))
+    (set-face-attribute 'default nil :height 120 :font "Hack")))
 
 (defun configure/remove-ui-elements ()
   (when (featurep 'menu-bar) (menu-bar-mode -1))
@@ -146,6 +146,10 @@
     (if (boundp 'my-theme)
 	(load-theme my-theme t)
       (load-theme 'adwaita t))))
+
+(defun configure/load-solarized-theme ()
+  (set-frame-parameter nil 'background-mode 'dark)
+  (enable-theme 'solarized))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)

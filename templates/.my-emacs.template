@@ -3,4 +3,4 @@
 		      my-lisp
 		      better-editing))
 
-(defvar my-theme 'doom-palenight)
+(defvar my-theme 'spacemacs-dark)
