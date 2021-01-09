@@ -20,7 +20,7 @@
   (expand-file-name (concat lisp-directory "core/")))
 
 (mapc 'add-to-load-path
-      `(
+      `(,lisp-directory
         ,lib-directory
 	,core-directory))
 

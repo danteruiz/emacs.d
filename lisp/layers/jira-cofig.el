@@ -1,3 +1,0 @@
-;;
-;; jira-config.el
-;;
