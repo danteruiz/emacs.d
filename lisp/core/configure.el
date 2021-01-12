@@ -5,6 +5,9 @@
 (require 'package)
 (require 'keybindings)
 (require 'major-modes)
+(require 'projects)
+(require 'better-editing)
+(require 'my-auto-complete)
 (require 'benchmark-init-loaddefs)
 
 (defvar layer-directory (concat start-directory "lisp/layers/"))
@@ -15,6 +18,7 @@
     ("gnu" . "elpa.gnu.org/packages/")))
 
 (defun configure/emacs-defaults ()
+  (configure/windows-special-settings)
   (setq load-prefer-newer t)
   (defvar elpa-https nil)
   (defvar emacs-insecure t)
@@ -34,6 +38,7 @@
   (setq system-time-locale "en_US")
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file 'noerror)
+  (setq column-number-mode t)
 
   (configure/archive-packages)
   ;;(configure/load-user-config-file)
@@ -80,7 +85,6 @@
   (global-auto-revert-mode 1))
 
 (defun configure/package-archive-absolute-pathp (archive)
-  "Return t if ARCHIVE has an absolute path defined."
   (let ((path (cdr archive)))
     (or (string-match-p "http" path)
         (string-prefix-p "~" path)
@@ -108,39 +112,17 @@
 			  elpa-archives))
   (setq package-enable-at-startup nil)
   (package-initialize)
-  ;(package-refresh-contents)
+  (package-refresh-contents)
   (configure/initialize-use-package))
 
 (defun configure/initialize-use-package ()
   (unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
+    (package-install 'use-package))
   (eval-when-compile
     (require 'use-package)))
 
-(defun configure/load-layers (my-layers)
-  (setq files (delete "." (delete ".." (directory-files (concat start-directory "lisp/layers/")))))
-  (dolist (layer my-layers)
-    (setq file (concat (format "%s" layer) ".el"))
-    (setq file-path (concat layer-directory file))
-    (when (file-exists-p file-path)
-      (load-file file-path))))
-
-(defun configure/load-user-config-file ()
-  (defvar my-layers-file (concat start-directory "my-layers.el"))
-  (when (not (file-exists-p my-layers-file))
-    (copy-file (concat template-directory ".my-emacs.template") my-layers-file))
-
-  (load-file my-layers-file))
-
-(defun configure/call-user-post-init ())
-
 (defun configure/load-custom-theme ()
       (load-theme 'naysayer t))
-
-(defun configure/load-solarized-theme ()
-  (set-frame-parameter nil 'background-mode 'dark)
-  (enable-theme 'solarized))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
@@ -149,6 +131,30 @@
 
 (defun configure/major-modes ()
   (major-mode/elisp)
-  (major-mode/cpp))
+  (major-mode/cpp)
+  (major-mode/org))
+
+(defun configure/projects ()
+  (projects/setup-projectile))
+
+(defun configure/windows-special-settings ()
+  (when (system-is-windows)
+    (setq default-directory (getenv "HOME"))))
+
+(defun configure/text-editing ()
+  (better-editing/whitespace)
+  (better-editing/move-text)
+  (better-editing/long-lines)
+  (global-set-key (kbd "C-c s") 'better-editing/header-swap))
+
+
+(defun configure/auto-complete ()
+  (auto-complete/init-company)
+  (auto-complete/init-auto-complete))
+
+(defun configure/syntax-checking ()
+  (use-package flycheck
+    :ensure t
+    :defer t))
 
 (provide 'configure)

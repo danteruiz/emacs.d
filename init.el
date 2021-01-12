@@ -1,7 +1,10 @@
 (load-file (concat (file-name-directory load-file-name)
-                     "lisp/core/load-paths.el"))
+                   "lisp/core/load-paths.el"))
 
 (require 'configure)
 (configure/emacs-defaults)
+(configure/text-editing)
+(configure/auto-complete)
+(configure/syntax-checking)
 (configure/major-modes)
-(put 'upcase-region 'disabled nil)
+(configure/projects)

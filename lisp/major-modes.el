@@ -1,14 +1,7 @@
-;;(require 'autopair)
-;;objective-c
-;;cpp
-;;qml
-;;eslp
-;;js2-mode
-;;company-tern
-;;glsl-mode
-;;csharp
-;;omnisharp
+(require 'better-editing)
 (defun major-mode/cpp ()
+  (better-editing/add-to-header-list '("h"))
+  (better-editing/add-to-source-list '("cpp" "c" "mm" "m"))
   (setq auto-mode-alist
 	(append '(("\\.h\\'" . c++-mode)
 		  ("\\.cpp\\'" . c++-mode)
@@ -98,6 +91,8 @@
       (add-hook 'js-mode-hook 'js2-hook))))
 
 (defun major-mode/shaders ()
+  (better-editing/add-to-header-list '("fs" "frag"))
+  (better-editing/add-to-source-list '("vs" "vert"))
   (setq auto-mode-alist
 	(append '(("\\.fs\\'" . glsl-mode)
 		  ("\\.vs\\'" . glsl-mode)

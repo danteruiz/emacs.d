@@ -26,4 +26,4 @@
 
 (add-to-list 'load-path (concat start-directory "themes/"))
 (add-to-list 'custom-theme-load-path (concat start-directory "themes/"))
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+;;(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
