@@ -22,7 +22,8 @@
 
 (defun better-editing/long-lines ()
   (add-hook 'prog-mode-hook (lambda () (interactive)
-			      (column-marker-1 80)))
+			      (column-marker-1 100)))
+  (setq column-enforce-column 100)
   (add-hook 'prog-mode-hook 'column-enforce-mode))
 
 (defun better-editing/move-text ()
@@ -63,8 +64,10 @@
 	(if (file-exists-p file)
 	    (progn
 	      (setq exit t)
-	      (find-file file))
-	  (message "better-editing/header-swap: File doesn't exist: %s" file))
+	      (find-file file)))
+
 	(setq extensions-list (cdr extensions-list))))))
 
 (provide 'better-editing)
+
+;;(message "better-editing/header-swap: File doesn't exist: %s" file)

@@ -122,7 +122,8 @@
     (require 'use-package)))
 
 (defun configure/load-custom-theme ()
-      (load-theme 'naysayer t))
+  (setq spacemacs-theme-comment-bg nil)
+  (load-theme 'spacemacs-dark t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
@@ -132,7 +133,9 @@
 (defun configure/major-modes ()
   (major-mode/elisp)
   (major-mode/cpp)
-  (major-mode/org))
+  (major-mode/org)
+  (major-mode/shaders)
+  (major-mode/cmake))
 
 (defun configure/projects ()
   (projects/setup-projectile))
