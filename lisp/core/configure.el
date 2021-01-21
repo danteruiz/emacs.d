@@ -9,6 +9,7 @@
 (require 'better-editing)
 (require 'my-auto-complete)
 (require 'benchmark-init-loaddefs)
+(require 'file-template)
 
 (defvar layer-directory (concat start-directory "lisp/layers/"))
 
@@ -39,6 +40,7 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file 'noerror)
   (setq column-number-mode t)
+  (setq user-full-name "Dante Ruiz")
 
   (configure/archive-packages)
   ;;(configure/load-user-config-file)
@@ -123,7 +125,7 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'spacemacs-dark t))
+  (load-theme 'spacemacs-light t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
@@ -138,7 +140,9 @@
   (major-mode/cmake))
 
 (defun configure/projects ()
-  (projects/setup-projectile))
+  (projects/setup-projectile)
+  (bind-prefix-keys 'leader-prefix-map
+		    "hp" 'template/personal-file-header))
 
 (defun configure/windows-special-settings ()
   (when (system-is-windows)
