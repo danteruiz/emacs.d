@@ -51,6 +51,8 @@
 		(smartparens-mode))))
 
 (defun major-mode/qt ()
+  (use-package qml-mode
+   :ensure t)
   (setq auto-mode-alist
 	(append '(("\\.qml\\'" . qml-mode))
 		auto-mode-alist))

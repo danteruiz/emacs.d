@@ -137,7 +137,8 @@
   (major-mode/cpp)
   (major-mode/org)
   (major-mode/shaders)
-  (major-mode/cmake))
+  (major-mode/cmake)
+  (major-mode/qt))
 
 (defun configure/projects ()
   (projects/setup-projectile)
