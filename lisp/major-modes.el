@@ -168,6 +168,7 @@
       '(add-to-list 'company-backends 'company-cmake))
     (company-mode))
   (use-package cmake-mode
+    :ensure t
     :defer t
     :init
     (progn

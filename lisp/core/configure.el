@@ -45,7 +45,7 @@
   (configure/archive-packages)
   ;;(configure/load-user-config-file)
   ;;(configure/load-layers my-layers)
-  ;;(configure/start-emacs-server)
+  (configure/start-emacs-server)
   (configure/load-custom-theme)
   (configure/hack-font))
 
