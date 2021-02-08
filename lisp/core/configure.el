@@ -1,13 +1,13 @@
-;;
 ;; configure emacs file
+;;
 ;;
 (require 'utils)
 (require 'package)
 (require 'keybindings)
 (require 'major-modes)
-(require 'projects)
 (require 'better-editing)
 (require 'my-auto-complete)
+(require 'projects)
 (require 'benchmark-init-loaddefs)
 (require 'file-template)
 
@@ -125,7 +125,7 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'spacemacs-light t))
+  (load-theme 'spacemacs-dark t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
