@@ -8,9 +8,3 @@
 (configure/syntax-checking)
 (configure/major-modes)
 (configure/projects)
-
-(add-hook 'find-file-not-found-hooks '(lambda ()
-					(message "Dante: not file is found")
-					(if (bound-and-true-p c++-mode)
-					    (message "c++-mode is on")
-					  (message "c++-mode is off"))))

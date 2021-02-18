@@ -68,6 +68,12 @@
 
 	(setq extensions-list (cdr extensions-list))))))
 
+
+
+(defun better-editing/spellcheck ()
+  )
 (provide 'better-editing)
+
+
 
 ;;(message "better-editing/header-swap: File doesn't exist: %s" file)
