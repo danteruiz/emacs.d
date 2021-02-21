@@ -1,6 +1,7 @@
 (defun projects/setup-projectile ()
   (use-package counsel-projectile
     :ensure t)
+
   (use-package projectile
     :ensure t
     :config
@@ -14,6 +15,7 @@
 	       "ice-server" "compiledResources" "external" "i18n" "icon" "ui"
 	       "fonts" "icons" "meshes" "sounds" "snapshot" "images"
 	       "mention-sounds" "visage" "stage" "packages" "debian")))
+
       (setq projectile-enable-caching t)
       (counsel-projectile-mode))))
 
