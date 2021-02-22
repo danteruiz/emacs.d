@@ -1,4 +1,7 @@
 (defun projects/setup-projectile ()
+  (use-package counsel-projectile
+    :ensure t)
+
   (use-package projectile
     :ensure t
     :config
@@ -13,7 +16,7 @@
 	       "fonts" "icons" "meshes" "sounds" "snapshot" "images"
 	       "mention-sounds" "visage" "stage" "packages" "debian")))
 
-      (setq projectile-completion-system 'ido)
-      (setq projectile-enable-caching t))))
+      (setq projectile-enable-caching t)
+      (counsel-projectile-mode))))
 
 (provide 'projects)

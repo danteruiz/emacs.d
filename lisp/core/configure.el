@@ -1,13 +1,13 @@
-;;
 ;; configure emacs file
+;;
 ;;
 (require 'utils)
 (require 'package)
 (require 'keybindings)
 (require 'major-modes)
-(require 'projects)
 (require 'better-editing)
 (require 'my-auto-complete)
+(require 'projects)
 (require 'benchmark-init-loaddefs)
 (require 'file-template)
 
@@ -42,7 +42,7 @@
   (setq column-number-mode t)
   (setq user-full-name "Dante Ruiz")
 
-  (configure/archive-packages)
+  (configure/archive-packages) 
   ;;(configure/load-user-config-file)
   ;;(configure/load-layers my-layers)
   (configure/start-emacs-server)
@@ -114,7 +114,7 @@
 			  elpa-archives))
   (setq package-enable-at-startup nil)
   (package-initialize)
-  (package-refresh-contents)
+  ;;(package-refresh-contents)
   (configure/initialize-use-package))
 
 (defun configure/initialize-use-package ()
@@ -125,7 +125,7 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'spacemacs-dark t))
+  (load-theme 'gruvbox-dark-hard t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
