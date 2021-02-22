@@ -125,7 +125,7 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'spacemacs-light t))
+  (load-theme 'spacemacs-dark t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
@@ -143,7 +143,9 @@
 (defun configure/projects ()
   (projects/setup-projectile)
   (bind-prefix-keys 'leader-prefix-map
-		    "hp" 'template/personal-file-header))
+		    "hp" 'template/personal-file-header)
+  (bind-prefix-keys 'leader-prefix-map
+		    "hw" 'template/work-file-header))
 
 (defun configure/windows-special-settings ()
   (when (system-is-windows)

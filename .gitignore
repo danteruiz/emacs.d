@@ -21,3 +21,4 @@ projectile.cache
 .last-package-update-key
 session.*
 custom.el
+.work.license.template
