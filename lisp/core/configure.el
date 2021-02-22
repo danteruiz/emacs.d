@@ -125,7 +125,7 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'underwater t))
+  (load-theme 'gruvbox-dark-hard t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
