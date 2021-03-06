@@ -30,4 +30,11 @@
   (template/insert-file-header
    (concat template-directory ".personal.cpp.template")))
 
+
+(defun template/work-file-header ()
+  (interactive)
+  (message "template file: %s" template-directory)
+  (template/insert-file-header
+   (concat template-directory ".work.license.template")))
+
 (provide 'file-template)

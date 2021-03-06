@@ -143,7 +143,9 @@
 (defun configure/projects ()
   (projects/setup-projectile)
   (bind-prefix-keys 'leader-prefix-map
-		    "hp" 'template/personal-file-header))
+		    "hp" 'template/personal-file-header)
+  (bind-prefix-keys 'leader-prefix-map
+		    "hw" 'template/work-file-header))
 
 (defun configure/windows-special-settings ()
   (when (system-is-windows)
