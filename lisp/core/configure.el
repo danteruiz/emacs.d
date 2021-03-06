@@ -125,7 +125,7 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'gruvbox-dark-hard t))
+  (load-theme 'doom-miramare t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
