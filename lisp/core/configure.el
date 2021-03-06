@@ -1,5 +1,5 @@
-;; configure emacs file
 ;;
+;; configure emacs file
 ;;
 (require 'utils)
 (require 'package)
