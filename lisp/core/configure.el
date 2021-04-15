@@ -42,7 +42,7 @@
   (setq column-number-mode t)
   (setq user-full-name "Dante Ruiz")
 
-  (configure/archive-packages) 
+  (configure/archive-packages)
   ;;(configure/load-user-config-file)
   ;;(configure/load-layers my-layers)
   (configure/start-emacs-server)
@@ -114,7 +114,8 @@
 			  elpa-archives))
   (setq package-enable-at-startup nil)
   (package-initialize)
-  ;;(package-refresh-contents)
+  (unless package-archive-contents
+    (package-refresh-contents))
   (configure/initialize-use-package))
 
 (defun configure/initialize-use-package ()
