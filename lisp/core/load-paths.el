@@ -19,10 +19,14 @@
 (defconst core-directory
   (expand-file-name (concat lisp-directory "core/")))
 
+(defconst package-directory
+  (expand-file-name (concat lisp-directory "packages/")))
+
 (mapc 'add-to-load-path
       `(,lisp-directory
         ,lib-directory
-	,core-directory))
+	,core-directory
+	,package-directory))
 
 (add-to-list 'load-path (concat start-directory "themes/"))
 (add-to-list 'custom-theme-load-path (concat start-directory "themes/"))

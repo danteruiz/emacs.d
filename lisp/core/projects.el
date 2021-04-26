@@ -16,7 +16,8 @@
 	       "fonts" "icons" "meshes" "sounds" "snapshot" "images"
 	       "mention-sounds" "visage" "stage" "packages" "debian"
 	       "Binaries" "Intermediate" "DerivedDataCache" ".vscode" ".kdev4"
-	       "Saved" "Content" "images")))
+	       "Saved" "Content" "images" "mention-sounds" "visage" "stage" "packages" "debian" 
+	       "bionic-amd64-Debug")))
 
       (setq projectile-globally-ignored-files
 	    (append
