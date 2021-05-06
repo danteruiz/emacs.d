@@ -40,7 +40,16 @@
 	    campany-dabbrev-downcase nil))))
 
 (defun auto-complete/init-auto-complete ()
-  (message "auto-complete/init-auto-complete"))
+  (use-package company
+    :ensure t
+    :custom
+    (company-idle-delay 0.5)
+    :bind
+    (:map company-active-map
+	  ("C-n". company-select-next)
+	  ("C-p". company-select-pervious)
+	  ("M-<". company-select-first)
+	  ("M->". company-select-last))))
 
 (defun auto-complete/init-yasnippet ()
   (message "auto-comeplete/init-yasnippet"))

@@ -139,6 +139,7 @@
   (major-mode/org)
   (major-mode/shaders)
   (major-mode/cmake)
+  (major-mode/rust)
   (major-mode/qt))
 
 (defun configure/projects ()
@@ -167,5 +168,4 @@
   (use-package flycheck
     :ensure t
     :defer t))
-
 (provide 'configure)
