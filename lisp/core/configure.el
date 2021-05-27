@@ -139,6 +139,7 @@
   (major-mode/org)
   (major-mode/shaders)
   (major-mode/cmake)
+  (major-mode/rust)
   (major-mode/qt))
 
 (defun configure/projects ()
@@ -160,12 +161,10 @@
 
 
 (defun configure/auto-complete ()
-  (auto-complete/init-company)
   (auto-complete/init-auto-complete))
 
 (defun configure/syntax-checking ()
   (use-package flycheck
     :ensure t
     :defer t))
-
 (provide 'configure)
