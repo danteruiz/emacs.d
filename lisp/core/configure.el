@@ -161,7 +161,6 @@
 
 
 (defun configure/auto-complete ()
-  (auto-complete/init-company)
   (auto-complete/init-auto-complete))
 
 (defun configure/syntax-checking ()

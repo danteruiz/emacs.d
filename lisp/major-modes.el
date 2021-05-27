@@ -26,11 +26,13 @@
 	     '((compnay-capf company-files)))
 	(setq company-minimum-prefix-length 1)
 	(setq indent-tabs-mode nil))
-      (add-hook 'racer-mode-hook 'my-racer-mode-hook)))
+      ;;(add-hook 'racer-mode-hook 'my-racer-mode-hook)
+      (add-hook 'racer-mode-hook #'company-mode)
+      (add-hook 'racer-mode-hook #'eldoc-mode)))
   (add-hook 'before-save-hook
 	    (lambda ()
-	      (when (eq major-mode 'rust-mode
-			(rust-format-buffer)))))
+	      (when (eq major-mode 'rust-mode)
+			(rust-format-buffer))))
   (add-hook 'rust-mode-hook 'flycheck-mode)
   (add-hook 'flycheck-mode-hook 'flycheck-rust-setup))
 
