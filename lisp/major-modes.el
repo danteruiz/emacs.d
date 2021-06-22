@@ -59,6 +59,8 @@
 	       (c-set-offset 'brace-list-open 0)
 	       (c-set-offset 'case-label '+)))
 
+  (add-hook 'c++-mode-hook 'flycheck-mode)
+
   (add-hook 'objc-mode-hook
 	    '(lambda ()
 	       (setq c-basic-offset 4)
@@ -68,7 +70,12 @@
 	       (c-set-offset 'substatement-open 0)
 	       (c-set-offset 'inlambda 0)
 	       (c-set-offset 'brace-list-open 0)
-	       (c-set-offset 'case-label '+))))
+	       (c-set-offset 'case-label '+)))
+
+  (use-package flycheck-clang-tidy
+    :ensure t
+    :after flycheck
+    :hook (flycheck-mode . flycheck-clang-tidy-setup)))
 
 (defun major-mode/elisp ()
   (use-package smartparens-config

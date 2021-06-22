@@ -126,7 +126,8 @@
 
 (defun configure/load-custom-theme ()
   (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'doom-miramare t))
+  (set-frame-parameter nil 'background-mode 'dark)
+  (load-theme 'solarized t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
