@@ -1,15 +1,7 @@
-;;
-;; configure emacs file
-;;
 (require 'utils)
-(require 'package)
 (require 'keybindings)
-(require 'major-modes)
-(require 'better-editing)
-(require 'my-auto-complete)
-(require 'projects)
+(require 'package)
 (require 'benchmark-init-loaddefs)
-(require 'file-template)
 
 (defvar layer-directory (concat start-directory "lisp/layers/"))
 
@@ -18,12 +10,14 @@
     ;;("org" . "orgmode.org/elpa")
     ("gnu" . "elpa.gnu.org/packages/")))
 
+
 (defun configure/emacs-defaults ()
   (configure/windows-special-settings)
+  (configure/load-custom-theme)
+  (configure/set-font)
   (setq load-prefer-newer t)
   (defvar elpa-https nil)
   (defvar emacs-insecure t)
-
   (configure/remove-ui-elements)
   (configure/mouse-style)
   (configure/backup-files)
@@ -40,18 +34,24 @@
   (setq custom-file "~/.emacs.d/custom.el")
   (load custom-file 'noerror)
   (setq column-number-mode t)
-  (setq user-full-name "Dante Ruiz")
 
   (configure/archive-packages)
-  ;;(configure/load-user-config-file)
-  ;;(configure/load-layers my-layers)
   (configure/start-emacs-server)
-  (configure/load-custom-theme)
-  (configure/hack-font))
+  (configure/evil-mode))
 
-(defun configure/hack-font ()
-  (when (member "Hack" (font-family-list))
-    (set-face-attribute 'default nil :height 120 :font "Hack")))
+
+(defun configure/evil-mode ()
+   (unless (package-installed-p 'evil)
+    (package-install 'evil))
+  (eval-when-compile
+    (require 'use-package)
+    (if use-evil-mode
+	(evil-mode 1))))
+
+(defun configure/set-font ()
+  (set-face-attribute 'default nil :height font-size)
+  (when (member font-type (font-family-list))
+    (set-face-attribute 'default nil :font font-type)))
 
 (defun configure/remove-ui-elements ()
   (when (featurep 'menu-bar) (menu-bar-mode -1))
@@ -125,46 +125,40 @@
     (require 'use-package)))
 
 (defun configure/load-custom-theme ()
-  (setq spacemacs-theme-comment-bg nil)
-  (load-theme 'doom-miramare t))
+  (set-frame-parameter nil 'background-mode 'dark)
+  (load-theme my-theme t))
 
 (defun configure/start-emacs-server ()
   (if (and (fboundp 'server-running-p)
            (not (server-running-p)))
       (server-start)))
 
-(defun configure/major-modes ()
-  (major-mode/elisp)
-  (major-mode/cpp)
-  (major-mode/org)
-  (major-mode/shaders)
-  (major-mode/cmake)
-  (major-mode/rust)
-  (major-mode/qt))
-
-(defun configure/projects ()
-  (projects/setup-projectile)
-  (bind-prefix-keys 'leader-prefix-map
-		    "hp" 'template/personal-file-header)
-  (bind-prefix-keys 'leader-prefix-map
-		    "hw" 'template/work-file-header))
-
 (defun configure/windows-special-settings ()
   (when (system-is-windows)
     (setq default-directory (getenv "HOME"))))
-
-(defun configure/text-editing ()
-  (better-editing/whitespace)
-  (better-editing/move-text)
-  (better-editing/long-lines)
-  (global-set-key (kbd "C-c s") 'better-editing/header-swap))
-
-
-(defun configure/auto-complete ()
-  (auto-complete/init-auto-complete))
 
 (defun configure/syntax-checking ()
   (use-package flycheck
     :ensure t
     :defer t))
 (provide 'configure)
+
+(defun configure/load-layers (my-layers)
+  (setq files (delete "." (delete ".." (directory-files
+					(concat start-directory
+						"lisp/layers/")))))
+  (dolist (layer my-layers)
+    (setq file (concat (format "%s" layer) ".el"))
+    (setq file-path (concat layer-directory file))
+    (when (file-exists-p file-path)
+      (load-file file-path))))
+
+(defun configure/load-user-config-file ()
+  (defvar my-layers-file (concat start-directory "my-layers.el"))
+  (when (not (file-exists-p my-layers-file))
+    (copy-file (concat template-directory ".my-emacs.template") my-layers-file))
+
+  (load-file my-layers-file))
+
+(defun configure/call-user-post-init ())
+
