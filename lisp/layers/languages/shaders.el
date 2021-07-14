@@ -6,7 +6,6 @@
 ;; Distributed under the MIT Lisense
 ;; https://mit-license.org/
 
-
 (require 'common)
 (better-editing/add-to-header-list '("fs" "frag"))
 (better-editing/add-to-source-list '("vs" "vert"))
