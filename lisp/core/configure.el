@@ -21,6 +21,8 @@
   (configure/remove-ui-elements)
   (configure/mouse-style)
   (configure/backup-files)
+  (setq comment-empty-lines t)
+  (setq comment-style 'extra-line)
 
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)

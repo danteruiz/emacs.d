@@ -29,6 +29,8 @@
 
 (add-hook 'c++-mode-hook
 	  '(lambda ()
+	     (setq comment-start "/*")
+	     (setq comment-end "*/")
 	     (setq c-basic-offset 4)
 	     (setq tab-width 4)
 	     (setq indent-tabs-mode nil)

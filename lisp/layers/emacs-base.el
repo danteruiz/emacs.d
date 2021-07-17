@@ -119,6 +119,7 @@
   (setq total-characters (- count-after count-before))
   (setq end (+ begin total-characters))
   (comment-region begin end)
+  (whitespace-cleanup-region begin end)
   (goto-char (point-min)))
 
 
