@@ -34,6 +34,7 @@
   :config
   (progn
     (define-key projectile-mode-map (kbd projectile-leader-key) 'projectile-command-map)
+    (setq projectile-enable-caching t)
     (counsel-projectile-mode)))
 
 (defun reload-init ()
