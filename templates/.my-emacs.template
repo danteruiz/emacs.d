@@ -24,7 +24,7 @@
 ;; https://sourcefoundry.org/hack/ - download link
 (defvar font-type "Hack")
 ;; the custom theme you want to load
-(defvar my-theme 'spacemacs-dark)
+(defvar my-theme 'kaolin-temple)
 
 (setq user-full-name "Enter Your Name Here")
 
