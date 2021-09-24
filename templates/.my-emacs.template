@@ -26,6 +26,8 @@
 ;; the custom theme you want to load
 (defvar my-theme 'kaolin-temple)
 
+(defvar enable-cpp-ide nil)
+
 (setq user-full-name "Enter Your Name Here")
 
 ;; list of directories and files projectile should ignore

@@ -13,6 +13,7 @@
 
 (defun configure/emacs-defaults ()
   (configure/windows-special-settings)
+  (configure/get-system-enviroment)
   (configure/load-custom-theme)
   (configure/set-font)
   (setq load-prefer-newer t)
@@ -161,6 +162,17 @@
     (copy-file (concat template-directory ".my-emacs.template") my-layers-file))
 
   (load-file my-layers-file))
+
+(defun configure/get-system-enviroment ()
+  (let ((vcpkg-root (shell-command-to-string
+		     "source ~/.bash_profile; echo -n $VCPKG_ROOT")))
+    (setenv "VCPKG_ROOT" vcpkg-root)
+    (message vcpkg-root))
+
+  (let ((lib-clang (shell-command-to-string
+		     "source ~/.bash_profile; echo -n $LIBCLANG_LLVM_CONFIG_EXECUTABLE")))
+    (setenv "LIBCLANG_LLVM_CONFIG_EXECUTABLE" lib-clang)
+    (message lib-clang)))
 
 (defun configure/call-user-post-init ())
 
