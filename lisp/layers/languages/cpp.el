@@ -55,60 +55,60 @@
 
 
 
-(defun configure-cpp-ide ()
-  (require 'rtags)
-  (require 'company-rtags)
+;; (defun configure-cpp-ide ()
+;;   (require 'rtags)
+;;   (require 'company-rtags)
+;; 
+;;   (use-package irony-eldoc
+;;     :ensure t)
+;; 
+;;   (use-package irony
+;;     :ensure t)
+;; 
+;;   (use-package flycheck-irony
+;;     :ensure t)
+;; 
+;;   (use-package company
+;;     :ensure t)
+;; 
+;;   (use-package auto-complete-clang
+;;     :ensure t)
+;; 
+;;   (use-package flycheck-rtags
+;;     :ensure t)
+;; 
+;;   (use-package rtags
+;;     :ensure t
+;;     :hook (c++-mode . rtags-start-process-unless-running)
+;;     :config
+;;     (progn
+;;       (setq rtags-completions-enabled t
+;; 	    rtags-rc-binary-name "/home/dante/packages/rtags/build/bin/rc"
+;; 	    rtags-use-helm nil
+;; 	    rtags-rdm-binary-name
+;; 	    "/home/dante/packages/rtags/build/bin/rdm")
+;;       (bind-prefix-keys 'leader-prefix-map "rr" 'rtags-find-references-at-point)
+;;       (bind-prefix-keys 'leader-prefix-map "re" 'rtags-find-symbol)
+;;       (bind-prefix-keys 'leader-prefix-map "rv" 'rtags-find-virtuals-at-point)
+;;       (bind-prefix-keys 'leader-prefix-map "rn" 'rtags-next-match)
+;;       (bind-prefix-keys 'leader-prefix-map "rp" 'rtags-previous-match)
+;;       (bind-prefix-keys 'leader-prefix-map "rP" 'rtags-preprocess-file)
+;;       (bind-prefix-keys 'leader-prefix-map "rf" 'rtags-location-stack-forward)
+;;       (bind-prefix-keys 'leader-prefix-map "rb" 'rtags-location-stack-back)
+;;       (bind-prefix-keys 'leader-prefix-map "rd" 'rtags-find-symbol-at-point)
+;;       (bind-prefix-keys 'leader-prefix-map "ra" 'rtags-find-references)))
 
-  (use-package irony-eldoc
-    :ensure t)
-
-  (use-package irony
-    :ensure t)
-
-  (use-package flycheck-irony
-    :ensure t)
-
-  (use-package company
-    :ensure t)
-
-  (use-package auto-complete-clang
-    :ensure t)
-
-  (use-package flycheck-rtags
-    :ensure t)
-
-  (use-package rtags
-    :ensure t
-    :hook (c++-mode . rtags-start-process-unless-running)
-    :config
-    (progn
-      (setq rtags-completions-enabled t
-	    rtags-rc-binary-name "/home/dante/packages/rtags/build/bin/rc"
-	    rtags-use-helm nil
-	    rtags-rdm-binary-name
-	    "/home/dante/packages/rtags/build/bin/rdm")
-      (bind-prefix-keys 'leader-prefix-map "rr" 'rtags-find-references-at-point)
-      (bind-prefix-keys 'leader-prefix-map "re" 'rtags-find-symbol)
-      (bind-prefix-keys 'leader-prefix-map "rv" 'rtags-find-virtuals-at-point)
-      (bind-prefix-keys 'leader-prefix-map "rn" 'rtags-next-match)
-      (bind-prefix-keys 'leader-prefix-map "rp" 'rtags-previous-match)
-      (bind-prefix-keys 'leader-prefix-map "rP" 'rtags-preprocess-file)
-      (bind-prefix-keys 'leader-prefix-map "rf" 'rtags-location-stack-forward)
-      (bind-prefix-keys 'leader-prefix-map "rb" 'rtags-location-stack-back)
-      (bind-prefix-keys 'leader-prefix-map "rd" 'rtags-find-symbol-at-point)
-      (bind-prefix-keys 'leader-prefix-map "ra" 'rtags-find-references)))
-
-  (use-package cmake-ide
-    :ensure t
-    :config
-    (progn
-      (cmake-ide-setup)
-      (setq rtags-autostart-diagnostics t)
-      (rtags-diagnostics)
-      (bind-prefix-keys 'leader-prefix-map "ca" 'cmake-ide-compile)))
-
-  (cmake-ide-setup))
+  ;; (use-package cmake-ide
+  ;;   :ensure t
+  ;;   :config
+  ;;   (progn
+  ;;     (cmake-ide-setup)
+  ;;     (setq rtags-autostart-diagnostics t)
+  ;;     (rtags-diagnostics)
+  ;;     (bind-prefix-keys 'leader-prefix-map "ca" 'cmake-ide-compile)))
+  ;; 
+  ;; (cmake-ide-setup))
 
 
-(if enable-cpp-ide
-    (configure-cpp-ide))
+;; (if enable-cpp-ide
+;;     (configure-cpp-ide))
