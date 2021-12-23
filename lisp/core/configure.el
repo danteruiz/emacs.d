@@ -3,6 +3,7 @@
 (require 'package)
 (require 'benchmark-init-loaddefs)
 
+
 (defvar layer-directory (concat start-directory "lisp/layers/"))
 
 (defvar elpa-archives
@@ -121,7 +122,7 @@
   (load-theme my-theme t))
 
 (defun configure/start-emacs-server ()
-  (if (and (fboundp 'server-running-p)
+  (unless (and (fboundp 'server-running-p)
            (not (server-running-p)))
       (server-start)))
 

@@ -1,4 +1,3 @@
-
 (defvar use-evil-mode nil)
 ;; the layers you want to load.
 ;; layers are located at /lisp/layers/
@@ -24,7 +23,7 @@
 ;; https://sourcefoundry.org/hack/ - download link
 (defvar font-type "Hack")
 ;; the custom theme you want to load
-(defvar my-theme 'kaolin-temple)
+(defvar my-theme 'solarized)
 
 (defvar enable-cpp-ide nil)
 
@@ -55,7 +54,7 @@
 
 
 ;; highlight lines longer than max-column-length
-(defvar max-column-length 80)
+(defvar max-column-length 100)
 
 ;; general keybindings
 (defvar header-swap "C-c s") ;; quickly go between source and header files
