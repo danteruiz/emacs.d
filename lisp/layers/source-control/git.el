@@ -1,27 +1,28 @@
-(defvar source-control-packages
-  '(magit
-    magit-gitflow
-    git-timemachine
-    git-messenger
-    git-link
-    ;;orgit
-    git-gutter
-    git-gutter+
-    git-gutter-fringe
-    git-gutter-fringe+))
+;; (defvar source-control-packages
+;;   '(magit
+;;     magit-gitflow
+;;     git-timemachine
+;;     git-messenger
+;;     git-link
+;;     ;;orgit
+;;     git-gutter
+;;     git-gutter+
+;;     git-gutter-fringe
+;;     git-gutter-fringe+))
+;; 
+;; 
+;; (install-packages source-control-packages)
 
-
-(install-packages source-control-packages)
-
-(use-package magit
-  :config
-  (progn
-    (message "magit-config")
-    (bind-prefix-keys 'leader-prefix-map
-		      "gs" 'magit-status
-		      "gb" 'magit-blame-addition)))
+;; (use-package magit
+;;   :config
+;;   (progn
+;;     (message "magit-config")
+;;     (bind-prefix-keys 'leader-prefix-map
+;; 		      "gs" 'magit-status
+;; 		      "gb" 'magit-blame-addition)))
 
 (use-package git-gutter+
+  :ensure t
   :commands (global-git-gutter+-mode git-gutter+-mode)
   :init
   (progn
@@ -35,12 +36,12 @@
      git-gutter+-hide-gutter t)))
 
 (use-package git-gutter-fringe+
+  :ensure t
   :commands git-gutter+-mode
   :init
   (progn
     (with-eval-after-load 'git-gutter+
-      (require 'git-gutter-fringe+))
-    (setq git-gutter-fr+-side 'right-fringe))
+      (require 'git-gutter-fringe+)))
   :config
   (progn
     (fringe-helper-define 'git-gutter-fr+-added nil

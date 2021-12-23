@@ -7,7 +7,6 @@
 
 (defvar elpa-archives
   '(("mepla" . "melpa.org/packages/")
-    ;;("org" . "orgmode.org/elpa")
     ("gnu" . "elpa.gnu.org/packages/")))
 
 
@@ -39,17 +38,7 @@
   (setq column-number-mode t)
 
   (configure/archive-packages)
-  (configure/start-emacs-server)
-  (configure/evil-mode))
-
-
-(defun configure/evil-mode ()
-   (unless (package-installed-p 'evil)
-    (package-install 'evil))
-  (eval-when-compile
-    (require 'use-package)
-    (if use-evil-mode
-	(evil-mode 1))))
+  (configure/start-emacs-server))
 
 (defun configure/set-font ()
   (set-face-attribute 'default nil :height font-size)
@@ -128,7 +117,7 @@
     (require 'use-package)))
 
 (defun configure/load-custom-theme ()
-  ;;(set-frame-parameter nil 'background-mode 'dark)
+  (set-frame-parameter nil 'background-mode 'dark)
   (load-theme my-theme t))
 
 (defun configure/start-emacs-server ()
@@ -173,6 +162,4 @@
 		     "source ~/.bash_profile; echo -n $LIBCLANG_LLVM_CONFIG_EXECUTABLE")))
     (setenv "LIBCLANG_LLVM_CONFIG_EXECUTABLE" lib-clang)
     (message lib-clang)))
-
-(defun configure/call-user-post-init ())
 
