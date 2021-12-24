@@ -15,6 +15,8 @@ my-layers.el
 
 tags
 
+.lsp-session-v1
+
 .[Cc]ask/
 .[Cc]ache/
 projectile-bookmarks.eld

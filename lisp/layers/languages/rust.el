@@ -1,3 +1,11 @@
+;; rust.el
+;;
+;; Created on 2021/12/23 by Dante Ruiz
+;; Copyright 2021 Dante Ruiz
+;;
+;; Distributed under the MIT Lisense
+;; https://mit-license.org/
+
 (use-package flycheck
   :ensure t)
 
@@ -14,7 +22,7 @@
   :bind
   (:map company-active-map
 	("C-n". company-select-next)
-	("C-p". company-select-pervious)
+	("C-p". company-select-previous)
 	("M-<". company-select-first)
 	("M->". company-select-last)))
 
@@ -51,6 +59,14 @@
     (setq read-process-output-max ( * 1024 1024)) ;;1 MB
     (setq lsp-idle-delay 0.500)
     (setq lsp-enable-snippet nil)
+    (setq lsp-headerline-breadcrumb-enable nil)
+    (setq lsp-ui-sideline-enable nil)
+    (setq lsp-ui-sideline-show-code-actions nil)
+    (setq lsp-lens-enable nil)
+    (setq lsp-ui-doc-enable nil)
+    (setq lsp-eldoc-enable-hover nil)
+    (setq lsp-signature-auto-activate nil)
+    (setq lsp-signature-render-documentation nil)
     (setq lsp-log-io nil))
   :init (setq lsp-keymap-prefix "C-c l")
   :hook ((rust-mode . lsp))
