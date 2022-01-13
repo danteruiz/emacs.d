@@ -18,30 +18,6 @@
   :bind
   (:map company-active-map
 	("C-n". company-select-next)
-	("C-p". company-select-pervious)
+	("C-p". company-select-previous)
 	("M-<". company-select-first)
 	("M->". company-select-last)))
-
-;; (use-package auto-complete-clang
-;;   :ensure t)
-;; 
-;; (use-package irony
-;;   :ensure t)
-;; 
-;; 
-;; (use-package rtags
-;;   :ensure t
-;;   :hook (c++-mode . rtags-start-process-unless-running)
-;;   :config (setq rtags-completions-enabled t
-;; 		rtags-rc-binary-name "/home/dante/packages/rtags/build/bin/rc"
-;; 		rtags-use-helm nil
-;; 		rtags-rdm-binary-name
-;; 		"/home/dante/packages/rtags/build/bin/rdm"))
-;; 
-;; (use-package cmake-ide
-;;   :ensure t
-;;   :config
-;;   (progn
-;;     (cmake-ide-setup)
-;;     (bind-prefix-keys 'leader-prefix-map "ca" 'cmake-ide-compile)
-;;     (company-mode)))
