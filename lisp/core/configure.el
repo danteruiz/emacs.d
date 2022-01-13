@@ -118,8 +118,9 @@
     (require 'use-package)))
 
 (defun configure/load-custom-theme ()
-  (set-frame-parameter nil 'background-mode 'dark)
-  (load-theme my-theme t))
+  (when (not (is-system-window-nil))
+    (set-frame-parameter nil 'background-mode 'dark)
+    (load-theme my-theme t)))
 
 (defun configure/start-emacs-server ()
   (unless (and (fboundp 'server-running-p)
