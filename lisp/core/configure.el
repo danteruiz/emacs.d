@@ -24,6 +24,7 @@
   (configure/backup-files)
   (setq comment-empty-lines t)
   (setq comment-style 'extra-line)
+  (global-hl-line-mode 1)
 
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)
@@ -119,7 +120,8 @@
 
 (defun configure/load-custom-theme ()
   (when (not (is-system-window-nil))
-    (set-frame-parameter nil 'background-mode 'dark)
+    ;;(set-frame-parameter nil 'background-mode 'dark)
+    (setq nord-region-highlight "frost")
     (load-theme my-theme t)))
 
 (defun configure/start-emacs-server ()
