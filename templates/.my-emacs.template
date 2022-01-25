@@ -23,7 +23,7 @@
 ;; https://sourcefoundry.org/hack/ - download link
 (defvar font-type "Hack")
 ;; the custom theme you want to load
-(defvar my-theme 'solarized)
+(defvar my-theme 'nord)
 
 (defvar enable-cpp-ide nil)
 
