@@ -13,13 +13,13 @@
 ;; 
 ;; (install-packages source-control-packages)
 
-;; (use-package magit
-;;   :config
-;;   (progn
-;;     (message "magit-config")
-;;     (bind-prefix-keys 'leader-prefix-map
-;; 		      "gs" 'magit-status
-;; 		      "gb" 'magit-blame-addition)))
+(use-package magit
+  :ensure t
+  :config
+  (progn
+    (bind-prefix-keys 'leader-prefix-map
+		      "gs" 'magit-status
+		      "gb" 'magit-blame-addition)))
 
 (use-package git-gutter+
   :ensure t
