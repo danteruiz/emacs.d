@@ -19,7 +19,8 @@
   (progn
     (bind-prefix-keys 'leader-prefix-map
 		      "gs" 'magit-status
-		      "gb" 'magit-blame-addition)))
+		      "gb" 'magit-blame-addition
+		      )))
 
 (use-package git-gutter+
   :ensure t
