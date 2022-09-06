@@ -119,8 +119,8 @@
     (require 'use-package)))
 
 (defun configure/load-custom-theme ()
-;; (when (not (is-system-window-nil))
-    ;;(set-frame-parameter nil 'background-mode 'dark)
+  (when (not (is-system-window-nil))
+    (set-frame-parameter nil 'background-mode 'dark))
    (setq nord-region-highlight "frost")
    (load-theme my-theme t))
 
