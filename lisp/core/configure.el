@@ -24,7 +24,7 @@
   (configure/backup-files)
   (setq comment-empty-lines t)
   (setq comment-style 'extra-line)
-  ;;(global-hl-line-mode 1)
+  (global-hl-line-mode 1)
 
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)

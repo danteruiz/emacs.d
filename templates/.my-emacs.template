@@ -3,6 +3,7 @@
 ;; layers are located at /lisp/layers/
 ;; uncomment the layers you wish to enable
 (defconst my-layers '(
+          ide
           emacs-base
 	  better-editing
 	  languages/lisp
@@ -23,7 +24,7 @@
 ;; https://sourcefoundry.org/hack/ - download link
 (defvar font-type "Hack")
 ;; the custom theme you want to load
-(defvar my-theme 'solarized)
+(defvar my-theme 'nord)
 
 (defvar enable-cpp-ide nil)
 
