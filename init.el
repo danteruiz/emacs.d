@@ -7,3 +7,7 @@
 (configure/load-user-config-file)
 (configure/emacs-defaults)
 (configure/load-layers my-layers)
+
+;; Local Variables:
+;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
+;; End:

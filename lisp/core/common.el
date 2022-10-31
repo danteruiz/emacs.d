@@ -8,3 +8,4 @@
   (setq better-editing-source-files (append files better-editing-source-files)))
 
 (provide 'common)
+;;; common.el ends here

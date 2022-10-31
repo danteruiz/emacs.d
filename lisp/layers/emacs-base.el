@@ -90,7 +90,7 @@
 
   (if (equal extensions-list nil)
       (message "better-editing/header-swap: Does not support the file extension %s: "
-	       file-extensions)
+	       file-extension)
     (progn
       (setq exit nil)
       (while (and extensions-list (not exit))
@@ -129,12 +129,21 @@
   (template/insert-file-header
    (concat template-directory template-header-file)))
 
+(defun template/lisp-file-header ()
+  (interactive)
+  (template/insert-file-header
+   (concat template-directory ".lisp.header.template")))
+
 
 (bind-prefix-keys 'leader-prefix-map
-		  "h" 'template/personal-file-header)
+		  "hc" 'template/personal-file-header)
 
+(bind-prefix-keys 'leader-prefix-map
+		  "hl" 'template/lisp-file-header)
 
 
 
 (global-set-key (kbd header-swap) 'better-editing/header-swap)
 (global-set-key [f12] 'reload-init)
+
+;;; emacs-base.el ends here

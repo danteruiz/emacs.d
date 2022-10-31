@@ -1,8 +1,12 @@
+;;; configure.el --- base configuration fucntion for emacs
+
+;;; commentary:
+
+;;; code:
 (require 'utils)
 (require 'keybindings)
 (require 'package)
 (require 'benchmark-init-loaddefs)
-
 
 (defvar layer-directory (concat start-directory "lisp/layers/"))
 
@@ -24,7 +28,6 @@
   (configure/backup-files)
   (setq comment-empty-lines t)
   (setq comment-style 'extra-line)
-  (global-hl-line-mode 1)
 
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)
@@ -166,3 +169,4 @@
     (setenv "LIBCLANG_LLVM_CONFIG_EXECUTABLE" lib-clang)
     (message lib-clang)))
 
+;;; configure.el ends here

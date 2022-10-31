@@ -3,7 +3,6 @@
   :hook (web-mode . hook-web-mode)
   :config
   (defun hook-web-mode()
-    (message "----------->")
     (setq comment-start "/*")
     (setq comment-end "*/")
     (setq c-basic-offset 2)
