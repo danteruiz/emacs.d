@@ -149,8 +149,8 @@
 
    ;; company-mode
    `(company-tooltip                      ((t (:foreground ,everforest-hard-dark-fg :background ,everforest-hard-dark-gray))))
-   `(company-tooltip-annotation           ((t (:foreground ,everforest-hard-dark-mono-2 :background ,everforest-hard-dark-gray))))
-   `(company-tooltip-annotation-selection ((t (:foreground ,everforest-hard-dark-mono-2 :background ,everforest-hard-dark-mono-3))))
+   `(company-tooltip-annotation           ((t (:foreground ,everforest-hard-dark-accent :background ,everforest-hard-dark-gray))))
+   `(company-tooltip-annotation-selection ((t (:foreground ,everforest-hard-dark-accent :background ,everforest-hard-dark-mono-3))))
    `(company-tooltip-selection            ((t (:foreground ,everforest-hard-dark-fg :background ,everforest-hard-dark-mono-3))))
    `(company-tooltip-mouse                ((t (:background ,everforest-hard-dark-gray))))
    `(company-tooltip-common               ((t (:foreground ,everforest-hard-dark-yellow :background ,everforest-hard-dark-gray))))

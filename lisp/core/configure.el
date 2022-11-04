@@ -14,7 +14,6 @@
   '(("mepla" . "melpa.org/packages/")
     ("gnu" . "elpa.gnu.org/packages/")))
 
-
 (defun configure/emacs-defaults ()
   (configure/windows-special-settings)
   (configure/get-system-enviroment)
@@ -170,3 +169,7 @@
     (message lib-clang)))
 
 ;;; configure.el ends here
+
+;; Local Variables:
+;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
+;; End:

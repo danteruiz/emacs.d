@@ -61,6 +61,14 @@
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
+(use-package flycheck-pos-tip
+  :ensure t
+  :after (flycheck)
+  :init
+  (progn
+    (flycheck-pos-tip-mode)
+    (setq flycheck-pos-tip-timeout 0)))
+
 ;; Local Variables
 ;; byte-compile-warnings: (not free-vars)
 ;; End:
