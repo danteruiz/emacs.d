@@ -26,5 +26,6 @@ projectile.cache
 session.*
 custom.el
 .work.license.template
+.work.header.template
 [eE]ln-cache
 [Bb]ookmarks
