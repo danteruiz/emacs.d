@@ -67,57 +67,8 @@
   "Add auto-save hook for clang-format-buffer."
   (add-hook 'before-save-hook 'clang-format-buffer-ide nil t))
 
-(add-hook 'c++-mode-hook 'clang-format-buffer-on-save)
+;;(add-hook 'c++-mode-hook 'clang-format-buffer-on-save)
 
 
 ;; c++ lsp server
-
-;; (use-package cmake-ide
-;;   :ensure t
-;;   :config
-;;   (progn
-;;     (cmake-ide-setup)
-;;     (setq rtags-autostart-diagnostics t)
-;;     (rtags-diagnostics)
-;;     (bind-prefix-keys 'leader-prefix-map "ca" 'cmake-ide-compile)))
-;; 
-;; (use-package company-rtags
-;;   :ensure t)
-;; 
-;; ;; (use-package company-irony
-;; ;;  :ensure t)
-;; (use-package company-c-headers
-;;   :ensure t)
-;; 
-;; (use-package rtags
-;;   :ensure t
-;;   :hook (c++-mode . rtags-start-process-unless-running)
-;;   :config
-;;   (progn
-;;     (eval-after-load 'company
-;;       '(add-to-list
-;; 	'company-backends 'company-rtags))
-;;     (setq rtags-completions-enabled t)
-;;     (setq rtags-rc-binary-name "/usr/bin/rc"
-;; 	  rtags-use-helm nil
-;; 	  rtags-rdm-binary-name "/usr/bin/rdm")
-;;     (bind-prefix-keys 'leader-prefix-map "rr" 'rtags-find-references-at-point)
-;;     (bind-prefix-keys 'leader-prefix-map "re" 'rtags-find-symbol)
-;;     (bind-prefix-keys 'leader-prefix-map "rv" 'rtags-find-virtuals-at-point)
- ;;     (bind-prefix-keys 'leader-prefix-map "rn" 'rtags-next-match)
-;;     (bind-prefix-keys 'leader-prefix-map "rp" 'rtags-previous-match)
-;;     (bind-prefix-keys 'leader-prefix-map "rP" 'rtags-preprocess-file)
-;;     (bind-prefix-keys 'leader-prefix-map "rf" 'rtags-location-stack-forward)
-;;     (bind-prefix-keys 'leader-prefix-map "rb" 'rtags-location-stack-back)
-;;     (bind-prefix-keys 'leader-prefix-map "rd" 'rtags-find-symbol-at-point)
-;;     (bind-prefix-keys 'leader-prefix-map "ra" 'rtags-find-references)))
-;; 
-;; 
-;; (cmake-ide-setup)
-;; (defun c++-ide-hook()
-;;   (company-mode))
-;; 
-;; (add-hook 'c++-mode-hook 'c++-ide-hook)
-
-;; (if enable-cpp-ide
-;;     (configure-cpp-ide))
+;;(add-hook 'c++-mode-hook 'lsp)
