@@ -12,8 +12,13 @@
           ;;languages/cpp
 	  ;;languages/shaders
 	  ;;languages/rust
+	  ;;languages/python
+	  ;;languages/javascript
+	  ;;languages/typescript
+	  ;;languages/protobuf
 
 	  ;;source-control/git
+	  ;;dev-ops
 ))
 
 ;; set the font and font size
