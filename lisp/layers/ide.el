@@ -30,6 +30,10 @@
 	("M-<". company-select-first)
 	("M->". company-select-last)))
 
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
 (use-package lsp-ivy
   :ensure t)
 

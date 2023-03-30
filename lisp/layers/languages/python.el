@@ -6,13 +6,12 @@
 ;; Distributed under the MIT Lisense
 ;; https://mit-license.org/
 
-(defun python-hook ()
-  (elpy-enable)
-  (flycheck-mode))
-
-(use-package elpy
+(use-package python-mode
   :ensure t
-  :defer t
   :init
   (progn
-    (add-hook 'python-mode-hook 'python-hook)))
+    (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))))
+
+(setq lsp-pylsp-plugins-flake8-ignore '("D100"))
+(add-hook 'python-mode-hook 'lsp)
+(add-hook 'python-mode-hook 'flycheck-mode)
