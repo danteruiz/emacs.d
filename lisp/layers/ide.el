@@ -73,6 +73,10 @@
     (flycheck-pos-tip-mode)
     (setq flycheck-pos-tip-timeout 0)))
 
+
+(message (concat package-directory "copilot/copilot.el"))
+(use-package copilot
+  :load-path (lambda () (concat package-directory "copilot")))
 ;; Local Variables
 ;; byte-compile-warnings: (not free-vars)
 ;; End:

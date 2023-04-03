@@ -1,11 +1,13 @@
 (require 'use-package)
-
 (defvar emacs-base-packages
   '(projectile
     ivy
+    editorconfig
     counsel-projectile))
 
 (install-packages emacs-base-packages)
+(use-package editorconfig
+  :ensure t)
 (use-package whitespace
   :defer t
   :init

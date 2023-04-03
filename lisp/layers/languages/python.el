@@ -10,6 +10,7 @@
   :ensure t
   :init
   (progn
+    (setq lsp-pylsp-plugins-autopep8-enabled t)
     (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))))
 
 (setq lsp-pylsp-plugins-flake8-ignore '("D100"))
