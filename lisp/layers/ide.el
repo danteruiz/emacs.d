@@ -73,10 +73,44 @@
     (flycheck-pos-tip-mode)
     (setq flycheck-pos-tip-timeout 0)))
 
+(defun ide/copilot-complete-or-accept ()
+  (interactive)
+  (if (copilot--overlay-visible)
+      (progn
+	(copilot-accept-completion)
+	(open-line 1)
+	(next-line))
+    (copilot-complete)))
 
-(message (concat package-directory "copilot/copilot.el"))
+(defun ide/copilot-quit()
+  (interactive)
+  (condition-case err
+      (when copilot--overlay
+	(lexical-let ((pre-copilot-disable-predicates copilot-disable-predicates))
+	  (setq copilot-disable-predicates (list (lambda () t)))
+	  (copilot-clear-overlay)
+	  (run-with-idle-timer
+	   1.0
+	   nil
+	   (lambda ()
+	     (setq copilot-disable-predicates pre-copilot-disable-predicates)))))
+    (error handler)))
+
 (use-package copilot
-  :load-path (lambda () (concat package-directory "copilot")))
+  :load-path (lambda () (concat package-directory "copilot"))
+  :bind
+  (:map copilot-mode-map
+	("M-[". #'copilot-next-completion)
+	("M-]". #'copilot-previous-completion)
+	("C-,". #'copilot-accept-completion-by-word)
+	("C-.". #'copilot-accept-completion-by-line)
+	("C-<tab>". #'ide/copilot-complete-or-accept))
+  :init
+  (progn
+    (eval-after-load 'company
+      '(add-to-list 'company-backends 'company-copilot))
+    (advice-add 'keyboard-quit :before #'ide/copilot-quit)))
+
 ;; Local Variables
 ;; byte-compile-warnings: (not free-vars)
 ;; End:

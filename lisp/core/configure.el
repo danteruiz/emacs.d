@@ -7,6 +7,7 @@
 (require 'keybindings)
 (require 'package)
 (require 'benchmark-init-loaddefs)
+(require 'ligature)
 
 (defvar layer-directory (concat start-directory "lisp/layers/"))
 
@@ -16,7 +17,7 @@
 
 (defun configure/emacs-defaults ()
   (configure/windows-special-settings)
-  (configure/get-system-enviroment)
+  ;;(configure/get-system-enviroment)
   (configure/load-custom-theme)
   (configure/set-font)
   (setq load-prefer-newer t)
@@ -31,7 +32,7 @@
   (setq inhibit-startup-screen t)
   (setq ring-bell-function #'ignore)
   (setq initial-scratch-message "")
-  '(inhibit-double-buffering . t)
+  ;;'(inhibit-double-buffering . t)
 
   (defalias 'yes-or-no-p 'y-or-n-p)
   (setq visible-bell t)
@@ -47,7 +48,26 @@
 (defun configure/set-font ()
   (set-face-attribute 'default nil :height font-size)
   (when (member font-type (font-family-list))
-    (set-face-attribute 'default nil :font font-type)))
+    (set-face-attribute 'default nil :font font-type))
+
+  (when (and (>= emacs-major-version 28)
+	     (string= font-type "Fira Code"))
+    ;; Enable the www ligature in every possible major mode
+    (ligature-set-ligatures 't '("www"))
+  
+    ;; Enable ligatures in programming modes
+    (ligature-set-ligatures 'prog-mode '("www" "**" "***" "**/" "*>" "*/" "\\\\" "\\\\\\" "{-" "::"
+					 ":::" ":=" "!!" "!=" "!==" "-}" "----" "-->" "->" "->>"
+					 "-<" "-<<" "-~" "#{" "#[" "##" "###" "####" "#(" "#?" "#_"
+					 "#_(" ".-" ".=" ".." "..<" "..." "?=" "??" ";;" "/*" "/**"
+					 "/=" "/==" "/>" "//" "///" "&&" "||" "||=" "|=" "|>" "^=" "$>"
+					 "++" "+++" "+>" "=:=" "==" "===" "==>" "=>" "=>>" "<="
+					 "=<<" "=/=" ">-" ">=" ">=>" ">>" ">>-" ">>=" ">>>" "<*"
+					 "<*>" "<|" "<|>" "<$" "<$>" "<!--" "<-" "<--" "<->" "<+"
+					 "<+>" "<=" "<==" "<=>" "<=<" "<>" "<<" "<<-" "<<=" "<<<"
+					 "<~" "<~~" "</" "</>" "~@" "~-" "~>" "~~" "~~>" "%%"))
+  
+    (global-ligature-mode 't)))
 
 (defun configure/remove-ui-elements ()
   (when (featurep 'menu-bar) (menu-bar-mode -1))

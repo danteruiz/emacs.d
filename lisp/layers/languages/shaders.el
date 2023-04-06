@@ -6,6 +6,8 @@
 ;; Distributed under the MIT Lisense
 ;; https://mit-license.org/
 
+;;; Code:
+
 (require 'common)
 (better-editing/add-to-header-list '("fs" "frag"))
 (better-editing/add-to-source-list '("vs" "vert"))
@@ -22,6 +24,7 @@
 
 (add-hook 'glsl-mode-hook
 	  '(lambda ()
+	     (copilot-mode)
 	     (setq c-basic-offset 4)
              (setq tab-width 4)
              (setq indent-tabs-mode nil)

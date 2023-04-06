@@ -6,13 +6,21 @@
 ;; Distributed under the MIT Lisense
 ;; https://mit-license.org/
 
+;;; Code:
+
 (use-package python-mode
   :ensure t
-  :init
+  :mode ("\\.py\\'" . python-mode)
+  :hook ((python-mode . lsp-mode)
+	 (python-mode . flycheck-mode)
+	 (python-mode . copilot-mode))
+  :initp
   (progn
     (setq lsp-pylsp-plugins-autopep8-enabled t)
-    (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))))
+    (setq lsp-pylsp-plugins-flake8-ignore '("D100"))))
 
-(setq lsp-pylsp-plugins-flake8-ignore '("D100"))
-(add-hook 'python-mode-hook 'lsp)
-(add-hook 'python-mode-hook 'flycheck-mode)
+;; Local Variables:
+;; byte-compile-warnings: (not free-vars)
+;; End:
+
+;;; python.el ends here
