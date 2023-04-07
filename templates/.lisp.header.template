@@ -1,4 +1,5 @@
-; %filename% ---
+; package --- Summary
+; %filename%
 
 ; Commentary:
 Created on %date% by %author%
@@ -8,6 +9,4 @@ Distributed under the MIT Lisense
 https://mit-license.org/
 
 ; Code:
-
-
 ; %filename% ends here

@@ -1,3 +1,7 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
 (defvar better-editing-header-files '())
 (defvar better-editing-source-files '())
 

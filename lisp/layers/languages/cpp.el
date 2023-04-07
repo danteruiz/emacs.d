@@ -69,6 +69,5 @@
 
 ;;(add-hook 'c++-mode-hook 'clang-format-buffer-on-save)
 
-
 ;; c++ lsp server
 ;;(add-hook 'c++-mode-hook 'lsp)

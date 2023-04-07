@@ -5,14 +5,27 @@
 ;;
 ;; Distributed under the MIT Lisense
 ;; https://mit-license.org/
+
+;;; Code:
 (use-package flycheck-rust
   :ensure t)
 
+(defun rust-format-on-save ()
+  (when (eq major-mode 'rust-mode)
+    (rust-format-buffer)))
+
 (use-package rust-mode
   :ensure t
+  :mode ("\\.rs\\'" . rust-mode)
+  :hook ((rust-mode . lsp)
+	 (rust-mode . flycheck-rust-setup)
+	 (rust-mode . copilot-mode)
+	 (before-save . rust-format-on-save))
   :init
   (progn
-    (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))))
+    (with-eval-after-load 'lsp-mode
+      (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\target\\'")
+      (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\Cargo.lock\\'"))))
 
 (use-package cargo
   :ensure t
@@ -22,14 +35,3 @@
 		      "rn" 'cargo-process-new
 		      "rb" 'cargo-process-build
 		      "rr" 'cargo-process-run)))
-
-(add-hook 'rust-mode-hook 'lsp)
-(add-hook 'before-save-hook
-	  (lambda ()
-	    (when (eq major-mode 'rust-mode)
-	      (rust-format-buffer))))
-(add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
-
-(with-eval-after-load 'lsp-mode
-  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\target\\'")
-  (add-to-list 'lsp-file-watch-ignored-files "[/\\\\]\\Cargo.lock\\'"))

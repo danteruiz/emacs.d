@@ -17,7 +17,7 @@
 
 (defun configure/emacs-defaults ()
   (configure/windows-special-settings)
-  ;;(configure/get-system-enviroment)
+  (configure/get-system-enviroment)
   (configure/load-custom-theme)
   (configure/set-font)
   (setq load-prefer-newer t)
