@@ -8,7 +8,7 @@
 ;; https://mit-license.org/
 ;;
 ;; ; Code:
-;; 
+;;
 ;;
 
 (defun protobuf-hook ()
@@ -21,4 +21,4 @@
     (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
     (add-hook 'protobuf-mode-hook 'protobuf-hook)))
 
-;; ; protobuf.el ends here
+;;; protobuf.el ends here
