@@ -9,8 +9,9 @@
   (setq key (pop bindings) command (pop bindings))
 
   (while key
-    (message "Key: %S Command: %S" key command)
     (define-key map (kbd key) command)
     (setq key (pop bindings) command (pop bindings))))
 
 (provide 'keybindings)
+
+;;; keybindings.el ends here

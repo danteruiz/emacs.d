@@ -35,8 +35,7 @@
 	 ("\\.js\\'" . web-mode)
 	 ("\\.vue?\\'" . web-mode))
   :hook ((web-mode . lsp)
-	 (web-mode . my-web-mode-hook)
-	 (web-mode . copilot-mode))
+	 (web-mode . my-web-mode-hook))
   :config
   (defun my-web-mode-hook ()
     "Hooks for Web mode."

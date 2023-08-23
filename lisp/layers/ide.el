@@ -57,8 +57,9 @@
     (setq lsp-eldoc-enable-hover nil)
     (setq lsp-signature-auto-activate nil)
     (setq lsp-signature-render-documentation nil)
-    (setq lsp-log-io nil))
-  :init (setq lsp-keymap-prefix "C-c l")
+    (setq lsp-log-io nil)
+    (bind-prefix-keys 'leader-prefix-map "lg" 'lsp-find-definition)
+    (setq lsp-keymap-prefix "C-c l"))
   :hook ((lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
 
@@ -96,20 +97,20 @@
 	     (setq copilot-disable-predicates pre-copilot-disable-predicates)))))
     (error handler)))
 
-(use-package copilot
-  :load-path (lambda () (concat package-directory "copilot"))
-  :bind
-  (:map copilot-mode-map
-	("M-[". #'copilot-next-completion)
-	("M-]". #'copilot-previous-completion)
-	("C-,". #'copilot-accept-completion-by-word)
-	("C-.". #'copilot-accept-completion-by-line)
-	("C-<tab>". #'ide/copilot-complete-or-accept))
-  :init
-  (progn
-    (eval-after-load 'company
-      '(add-to-list 'company-backends 'company-copilot))
-    (advice-add 'keyboard-quit :before #'ide/copilot-quit)))
+;; (use-package copilot
+;;   :load-path (lambda () (concat package-directory "copilot"))
+;;   :bind
+;;   (:map copilot-mode-map
+;; 	("M-[". #'copilot-next-completion)
+;; 	("M-]". #'copilot-previous-completion)
+;; 	("C-,". #'copilot-accept-completion-by-word)
+;; 	("C-.". #'copilot-accept-completion-by-line)
+;; 	("C-<tab>". #'ide/copilot-complete-or-accept))
+;;   :init
+;;   (progn
+;;     (eval-after-load 'company
+;;       '(add-to-list 'company-backends 'company-copilot))
+;;     (advice-add 'keyboard-quit :before #'ide/copilot-quit)))
 
 ;; Local Variables
 ;; byte-compile-warnings: (not free-vars)

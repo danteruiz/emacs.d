@@ -1,0 +1,66 @@
+(defvar use-evil-mode nil)
+;; the layers you want to load.
+;; layers are located at /lisp/layers/
+;; uncomment the layers you wish to enable
+(defconst my-layers '(
+	  emacs-base
+	  ide
+	  languages/lisp
+
+	  org
+          languages/cpp
+	  languages/shaders
+	  languages/rust
+	  languages/python
+	  languages/web-dev
+	  languages/protobuf
+
+	  source-control/git
+	  dev-ops
+))
+
+;; set the font and font size
+;; font size is 1/10 pt, 100 will get you 10 pt
+
+(defvar font-size 120)
+;; the font type you want to use (Hack font is not installed by default)
+;; https://sourcefoundry.org/hack/ - download link
+(defvar font-type "Fira Code")
+;;(defvar font-type "Hack")
+;; the custom theme you want to load
+(defvar my-theme 'poet-dark-monochrome)
+
+(defvar enable-cpp-ide nord)
+
+(setq user-full-name "Dante Ruiz (druiz@futurex.com)")
+
+;; list of directories and files projectile should ignore
+;; you need to invalidate the cache to have changes take a effect
+(defvar ignored-directories '(
+    ".git" ".cache" "auto-save-list" "elpa" "build" "target" "node_modules" "dist_electron"
+))
+
+(defvar ignored-files '(
+
+))
+
+
+;; the variables to replace when inserting the header template file
+(defvar template-replacement-alist
+  '(("%filename%" . (lambda ()
+		      (file-name-nondirectory buffer-file-name)))
+    ("%creator%" . user-full-name)
+    ("%author%" . user-full-name)
+    ("%year%" . (lambda () (format-time-string "%Y")))
+    ("%date%" . (lambda () (format-time-string "%Y/%m/%d")))))
+
+;; insert file header at location of cusor (M-m h)
+(defvar template-header-file ".work.header.template")
+
+
+;; highlight lines longer than max-column-length
+(defvar max-column-length 100)
+
+;; general keybindings
+(defvar header-swap "C-c s") ;; quickly go between source and header files
+(defvar projectile-leader-key "C-c p")

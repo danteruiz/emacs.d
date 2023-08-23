@@ -13,13 +13,9 @@
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :hook ((python-mode . flycheck-mode)
-	 (python-mode . lsp)
-	 (python-mode . copilot-mode))
+	 (python-mode . lsp))
   :init
   (progn
-    ;; (add-hook 'python-mode-hook 'lsp)
-    ;; (add-hook 'python-mode-hook 'flycheck-mode)
-    ;; (add-hook 'python-mode-hook 'copilot-mode)
     (setq lsp-pylsp-plugins-autopep8-enabled t)
     (setq lsp-pylsp-plugins-flake8-ignore '("D100"))))
 

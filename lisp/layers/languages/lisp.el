@@ -17,7 +17,9 @@
   (eval-after-load 'company
     '(add-to-list 'company-backends 'company-capf))
   (company-mode)
-  (copilot-mode)
+  ;;(copilot-mode)
   (flycheck-mode))
 
 (add-hook 'emacs-lisp-mode-hook 'elisp-setup)
+
+;;; lisp.el ends here

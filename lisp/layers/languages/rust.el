@@ -19,7 +19,6 @@
   :mode ("\\.rs\\'" . rust-mode)
   :hook ((rust-mode . lsp)
 	 (rust-mode . flycheck-rust-setup)
-	 (rust-mode . copilot-mode)
 	 (before-save . rust-format-on-save))
   :init
   (progn
