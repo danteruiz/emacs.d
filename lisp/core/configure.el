@@ -142,7 +142,7 @@
 
 (defun configure/load-custom-theme ()
   (when (not (is-system-window-nil))
-    (set-frame-parameter nil 'background-mode 'light))
+    (set-frame-parameter nil 'background-mode 'dark))
   (load-theme my-theme t))
 
 (defun configure/start-emacs-server ()
