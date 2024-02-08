@@ -1,4 +1,4 @@
-(deftheme starlit "The Starlit theme for Emacs, inspired by the Matrix.")
+(deftheme starlit "The Starlit theme for Emacs,")
 
 (let ((class '((class color) (min-colors 89)))
       (starlit0 "#062329")
@@ -8,17 +8,35 @@
       (starlit4 "#bda78c")
       (starlit5 "#c4ad90")
       (starlit6 "#d1b897")
-      (starlit7 "#bcd8da")
-      (starlit8 "#b5dcef")
-      (starlit9 "#a3b5bb")
-      (starlit10 "#8299a1")
+      (starlit7 "#d2fae3")
+      (starlit8 "#afe2ce")
+      (starlit9 "#97b38e")
+      (starlit10 "#9FAFA1")
       (starlit11 "#9b5e56")
       (starlit12 "#d19a66")
-      (starlit13 "#c0b84a")
-      (starlit14 "#76946a")
+      (starlit13 "#FFA826")
+      (starlit14 "#8fa95e")
       (starlit15 "#7ad0c6")
 
-      (starlit-comment "#2a4043")
+      ;;#9FAFA1 #656f15
+      ;;#94968A #72a3a0
+      ;;#8F7F70 #86bba9
+      ;;#7E7485 #afe2ce
+      ;;#7C5960 #a6bdbc
+      ;;#58201A #8a939e
+      ;;#FFA826 #8fa95e
+      ;;#E16111 #555e1b
+      ;;#d6b796
+      ;;#97b38e
+      ;;#5daa90
+      ;;#f1d2a6
+      ;;#a9464a
+      ;;#e4944d
+      ;;#f2e1bc
+      ;;#d2fae3
+      ;;#60a078
+
+      (starlit-comment "#7C5960")
       (starlit-annotation "#7ad0c6")
       (starlit-uniform-mode-lines-background "#0a3a3e")
       (starlit-region-highlight-background "#2a4043"))
@@ -50,20 +68,20 @@
    `(default ((,class (:foreground ,starlit4 :background ,starlit0))))
    `(error ((,class (:foreground ,starlit11 :weight bold))))
    `(escape-glyph ((,class (:foreground ,starlit12))))
-   `(font-lock-builtin-face ((,class (:foreground ,starlit9))))
+   `(font-lock-builtin-face ((,class (:foreground ,starlit7))))
    `(font-lock-comment-face ((,class (:foreground ,starlit-comment))))
    `(font-lock-comment-delimiter-face ((,class (:foreground ,starlit-comment))))
-   `(font-lock-constant-face ((,class (:foreground ,starlit9))))
+   `(font-lock-constant-face ((,class (:foreground ,starlit7))))
    `(font-lock-doc-face ((,class (:foreground ,starlit-comment))))
    `(font-lock-function-name-face ((,class (:foreground ,starlit4))))
-   `(font-lock-keyword-face ((,class (:foreground ,starlit9))))
-   `(font-lock-negation-char-face ((,class (:foreground ,starlit9))))
+   `(font-lock-keyword-face ((,class (:foreground ,starlit7))))
+   `(font-lock-negation-char-face ((,class (:foreground ,starlit7))))
    `(font-lock-preprocessor-face ((,class (:foreground ,starlit10 :weight bold))))
-   `(font-lock-reference-face ((,class (:foreground ,starlit9))))
+   `(font-lock-reference-face ((,class (:foreground ,starlit7))))
    `(font-lock-regexp-grouping-backslash ((,class (:foreground ,starlit13))))
    `(font-lock-regexp-grouping-construct ((,class (:foreground ,starlit13))))
    `(font-lock-string-face ((,class (:foreground ,starlit14))))
-   `(font-lock-type-face ((,class (:foreground ,starlit7))))
+   `(font-lock-type-face ((,class (:foreground ,starlit9))))
    `(font-lock-variable-name-face ((,class (:foreground ,starlit4))))
    `(font-lock-warning-face ((,class (:foreground ,starlit13))))
    `(italic ((,class (:slant italic))))
