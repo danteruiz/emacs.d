@@ -6,6 +6,7 @@
           ide
           emacs-base
 	  better-editing
+	  dev-ops
 	  languages/lisp
 
 	  ;;org
@@ -18,7 +19,6 @@
 	  ;;languages/protobuf
 
 	  ;;source-control/git
-	  ;;dev-ops
 ))
 
 ;; set the font and font size
@@ -29,7 +29,7 @@
 ;; https://sourcefoundry.org/hack/ - download link
 (defvar font-type "Hack")
 ;; the custom theme you want to load
-(defvar my-theme 'everforest-hard-dark)
+(defvar my-theme 'poet-dark)
 
 (defvar enable-cpp-ide nil)
 
