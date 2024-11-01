@@ -16,43 +16,38 @@
     (add-hook 'cmake-mode-hook 'cmake-hook)))
 
 
+(defun cpp-mode-setup()
+  (setq comment-start "/*")
+  (setq comment-end "*/")
+  (setq c-basic-offset 4)
+  (setq tab-width 4)
+  (setq indent-tabs-mode nil)
+  (setq c-continued-statemant-offset 2)
+  (c-set-offset 'substatement-open 0)
+  (c-set-offset 'inlambda 0)
+  (c-set-offset 'innamespace 0)
+  (c-set-offset 'brace-list-intro '+)
+  (c-set-offset 'brace-list-open 0)
+  (c-set-offset 'innamespace 0)
+  (c-set-offset 'case-label '+))
+
+(use-package cc-mode
+  :ensure nil
+  :mode ("\\.h\\'" . c++-mode)
+  :mode ("\\.cpp\\'" . c++-mode)
+  :mode ("\\.hpp\\'" . c++-mode)
+  :hook((c++-mode . cpp-mode-setup)
+	(c++-mode . lsp))
+  :config
+  (with-eval-after-load 'lsp-mode
+    (setq lsp-clients-clangd-args
+          '("--header-insertion=never"
+	    "--log=verbose"
+	    "--query-driver=/usr/bin/gcc,/home/dante/.nix-profile/bin/clang"
+            "--compile-commands-dir=build"))))
 
 (better-editing/add-to-header-list '("h"))
 (better-editing/add-to-source-list '("cpp" "c" "mm" "m"))
-(setq auto-mode-alist
-      (append '(("\\.h\\'" . c++-mode)
-		("\\.cpp\\'" . c++-mode)
-		("\\.hpp\\'" . c++-mode)
-		("\\.mm\\'" . objc-mode)
-		("\\.m\\'" . objc-mode))
-	      auto-mode-alist))
-
-(add-hook 'c++-mode-hook
-	  '(lambda ()
-	     (setq comment-start "/*")
-	     (setq comment-end "*/")
-	     (setq c-basic-offset 4)
-	     (setq tab-width 4)
-	     (setq indent-tabs-mode nil)
-	     (setq c-continued-statemant-offset 2)
-	     (c-set-offset 'substatement-open 0)
-	     (c-set-offset 'inlambda 0)
-	     (c-set-offset 'innamespace 0)
-	     (c-set-offset 'brace-list-intro '+)
-	     (c-set-offset 'brace-list-open 0)
-	     (c-set-offset 'innamespace 0)
-	     (c-set-offset 'case-label '+)))
-
-(add-hook 'objc-mode-hook
-	  '(lambda ()
-	     (setq c-basic-offset 4)
-	     (setq tab-width 4)
-	     (setq indent-tabs-mode nil)
-	     (setq c-continued-statemant-offset 2)
-	     (c-set-offset 'substatement-open 0)
-	     (c-set-offset 'inlambda 0)
-	     (c-set-offset 'brace-list-open 0)
-	     (c-set-offset 'case-label '+)))
 
 ;; clang-format
 (use-package clang-format
@@ -68,6 +63,3 @@
   (add-hook 'before-save-hook 'clang-format-buffer-ide nil t))
 
 ;;(add-hook 'c++-mode-hook 'clang-format-buffer-on-save)
-
-;; c++ lsp server
-;;(add-hook 'c++-mode-hook 'lsp)

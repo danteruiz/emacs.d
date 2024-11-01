@@ -171,11 +171,11 @@
       (load-file file-path))))
 
 (defun configure/load-user-config-file ()
-  (defvar my-layers-file (concat start-directory "my-layers.el"))
-  (when (not (file-exists-p my-layers-file))
-    (copy-file (concat template-directory ".my-emacs.template") my-layers-file))
+  (defvar emacs-config (concat (getenv "HOME") "/.emacs-config.el"))
+  (when (not (file-exists-p emacs-config))
+    (copy-file (concat template-directory ".my-emacs.template") emacs-config))
 
-  (load-file my-layers-file))
+  (load-file emacs-config))
 
 (defun configure/get-system-enviroment ()
   (let ((vcpkg-root (shell-command-to-string
