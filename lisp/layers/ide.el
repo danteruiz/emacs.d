@@ -41,6 +41,10 @@
   :ensure t
   :config (which-key-mode))
 
+(use-package envrc
+  :ensure t
+  :hook (after-init . envrc-global-mode))
+
 (use-package lsp-mode
   :ensure t
   :config

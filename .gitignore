@@ -10,12 +10,15 @@
 [Ss]erver/
 [Tt]ransient/
 [Ee]lpy/
+[Ww]orkspace/
+[Ee]clipse.jdt.ls/
 
 my-layers.el
 
 tags
 
 .lsp-session-v1
+.dap-breakpoints
 
 .[Cc]ask/
 .[Cc]ache/
