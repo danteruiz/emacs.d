@@ -1,6 +1,2 @@
 # Enforce UTF-8 + LF for all text files
 * text=auto eol=lf working-tree-encoding=UTF-8
-
-# (Optional) Windows-specific overrides if you ever need CRLF
-# *.bat text eol=crlf working-tree-encoding=UTF-8
-# *.ps1 text eol=crlf working-tree-encoding=UTF-8
