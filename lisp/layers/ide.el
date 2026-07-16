@@ -41,9 +41,9 @@
   :ensure t
   :config (which-key-mode))
 
-(use-package envrc
-  :ensure t
-  :hook (after-init . envrc-global-mode))
+;; (use-package envrc
+;;   :ensure t
+;;   :hook (after-init . envrc-global-mode))
 
 (use-package lsp-mode
   :ensure t
@@ -60,6 +60,8 @@
     (setq lsp-ui-doc-enable nil)
     (setq lsp-eldoc-enable-hover nil)
     (setq lsp-signature-auto-activate nil)
+    (setq lsp-format-buffer-on-save t)
+    (setq lsp-enable-indentation t)
     (setq lsp-signature-render-documentation nil)
     (setq lsp-log-io nil)
     (bind-prefix-keys 'leader-prefix-map "lg" 'lsp-find-definition)

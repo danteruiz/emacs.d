@@ -24,7 +24,11 @@
 
     (add-hook 'prog-mode-hook 'emacs/show-trailing-whitespace)))
 
+
 (use-package counsel-projectile
+  :ensure t)
+
+(use-package projectile
   :ensure t
   :init
   (progn
@@ -32,26 +36,25 @@
 	  (append ignored-directories))
 
     (setq projectile-globally-ignored-files
-	  (append ignored-files)))
-  :config
-  (progn
+	  (append ignored-files))
     (define-key projectile-mode-map (kbd projectile-leader-key) 'projectile-command-map)
+    (projectile-mode +1)
     (setq projectile-enable-caching t)
     (counsel-projectile-mode)))
 
 (use-package tree-sitter-langs
   :ensure t)
 
-(use-package tree-sitter
-  :ensure t
-  :hook (prog-mode . turn-on-tree-sitter-mode)
-  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (require 'tree-sitter-langs)
-  ;; This makes every node a link to a section of code
-  (setq tree-sitter-debug-jump-buttons t
-        ;; and this highlights the entire sub tree in your code
-        tree-sitter-debug-highlight-jump-region t))
+;; (use-package tree-sitter
+;;   :ensure t
+;;   :hook (prog-mode . turn-on-tree-sitter-mode)
+;;   :hook (tree-sitter-after-on . tree-sitter-hl-mode)
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   ;; This makes every node a link to a section of code
+;;   (setq tree-sitter-debug-jump-buttons t
+;;         ;; and this highlights the entire sub tree in your code
+;;         tree-sitter-debug-highlight-jump-region t))
 
 (defun reload-init ()
   (interactive)
